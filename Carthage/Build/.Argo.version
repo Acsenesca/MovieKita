@@ -3,7 +3,7 @@
   "iOS" : [
     {
       "name" : "Argo",
-      "hash" : "2bbc0210d8afb61f56cfa70b6596174c980ff8d12d3f3bb4a79a6ce160bd6b03",
+      "hash" : "03098f59ec0ea0771c9749d5037bb2b698f0277254b07daf2a651fe17d793226",
       "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]

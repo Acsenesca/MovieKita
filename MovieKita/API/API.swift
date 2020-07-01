@@ -60,7 +60,7 @@ extension API : APITarget {
 //MARK:- TOKEN
 struct APIToken: APIFactoryable {
     var path: String {
-        return "/authentication/token/new"
+        return "/authentication/token/new/"
     }
     
     var method: Moya.Method {
@@ -72,6 +72,6 @@ struct APIToken: APIFactoryable {
 			"api_key": APIKey
         ]
 		
-        return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
     }
 }

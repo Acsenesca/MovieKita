@@ -41,6 +41,8 @@
 		46FD212024ACEA1B00B10433 /* ReactiveMoya.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD211E24ACEA1B00B10433 /* ReactiveMoya.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		46FD212224ACEA8700B10433 /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD212124ACEA8600B10433 /* Runes.framework */; };
 		46FD212324ACEA8700B10433 /* Runes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD212124ACEA8600B10433 /* Runes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46FD212524AD044200B10433 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD212424AD044200B10433 /* KeychainAccess.framework */; };
+		46FD212624AD044200B10433 /* KeychainAccess.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD212424AD044200B10433 /* KeychainAccess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +55,7 @@
 				46FD211924ACE62200B10433 /* Curry.framework in Embed Frameworks */,
 				46FD210524ACCE0F00B10433 /* ReactiveSwift.framework in Embed Frameworks */,
 				46FD210424ACCE0C00B10433 /* RxSwift.framework in Embed Frameworks */,
+				46FD212624AD044200B10433 /* KeychainAccess.framework in Embed Frameworks */,
 				46FD210324ACCE0800B10433 /* Moya.framework in Embed Frameworks */,
 				46F35F2C24ACB62D00DC92C3 /* netfox_ios.framework in Embed Frameworks */,
 				46FD212024ACEA1B00B10433 /* ReactiveMoya.framework in Embed Frameworks */,
@@ -93,6 +96,7 @@
 		46FD211C24ACE97500B10433 /* APIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		46FD211E24ACEA1B00B10433 /* ReactiveMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveMoya.framework; path = Carthage/Build/iOS/ReactiveMoya.framework; sourceTree = "<group>"; };
 		46FD212124ACEA8600B10433 /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Runes.framework; path = Carthage/Build/iOS/Runes.framework; sourceTree = "<group>"; };
+		46FD212424AD044200B10433 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 				46FD211824ACE62200B10433 /* Curry.framework in Frameworks */,
 				46F35F2B24ACB62D00DC92C3 /* netfox_ios.framework in Frameworks */,
 				46F35F2D24ACB62D00DC92C3 /* Alamofire.framework in Frameworks */,
+				46FD212524AD044200B10433 /* KeychainAccess.framework in Frameworks */,
 				464F098F24ACBF2100EA7C14 /* Kingfisher.framework in Frameworks */,
 				46FD20FE24ACCD5200B10433 /* ReactiveSwift.framework in Frameworks */,
 				46FD211F24ACEA1B00B10433 /* ReactiveMoya.framework in Frameworks */,
@@ -152,6 +157,7 @@
 		46F35F2824ACB62D00DC92C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46FD212424AD044200B10433 /* KeychainAccess.framework */,
 				46FD212124ACEA8600B10433 /* Runes.framework */,
 				46FD211E24ACEA1B00B10433 /* ReactiveMoya.framework */,
 				46FD211724ACE62200B10433 /* Curry.framework */,
@@ -275,6 +281,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Curry.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveMoya.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Runes.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
