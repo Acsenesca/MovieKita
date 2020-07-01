@@ -19,6 +19,28 @@
 		46F35F2D24ACB62D00DC92C3 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F35F2A24ACB62D00DC92C3 /* Alamofire.framework */; };
 		46F35F2E24ACB62D00DC92C3 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46F35F2A24ACB62D00DC92C3 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		46F35F3424ACBB5E00DC92C3 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46F35F3324ACBB5E00DC92C3 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46FD20FE24ACCD5200B10433 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD20FD24ACCD5200B10433 /* ReactiveSwift.framework */; };
+		46FD210024ACCD5800B10433 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD20FF24ACCD5800B10433 /* RxSwift.framework */; };
+		46FD210224ACCD6100B10433 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD210124ACCD6100B10433 /* Moya.framework */; };
+		46FD210324ACCE0800B10433 /* Moya.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD210124ACCD6100B10433 /* Moya.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46FD210424ACCE0C00B10433 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD20FF24ACCD5800B10433 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46FD210524ACCE0F00B10433 /* ReactiveSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD20FD24ACCD5200B10433 /* ReactiveSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46FD210824ACCEBF00B10433 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FD210724ACCEBF00B10433 /* APIProvider.swift */; };
+		46FD210A24ACCF2500B10433 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FD210924ACCF2500B10433 /* API.swift */; };
+		46FD210C24ACCFCF00B10433 /* APIFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FD210B24ACCFCF00B10433 /* APIFactory.swift */; };
+		46FD210E24ACD05A00B10433 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FD210D24ACD05A00B10433 /* Constants.swift */; };
+		46FD211024ACD24200B10433 /* ServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FD210F24ACD24200B10433 /* ServiceAPI.swift */; };
+		46FD211324ACD3C000B10433 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FD211224ACD3C000B10433 /* Token.swift */; };
+		46FD211524ACDAC300B10433 /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD211424ACDAC300B10433 /* Argo.framework */; };
+		46FD211624ACDAC300B10433 /* Argo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD211424ACDAC300B10433 /* Argo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46FD211824ACE62200B10433 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD211724ACE62200B10433 /* Curry.framework */; };
+		46FD211924ACE62200B10433 /* Curry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD211724ACE62200B10433 /* Curry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46FD211B24ACE70700B10433 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FD211A24ACE70700B10433 /* APIError.swift */; };
+		46FD211D24ACE97500B10433 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FD211C24ACE97500B10433 /* APIHelper.swift */; };
+		46FD211F24ACEA1B00B10433 /* ReactiveMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD211E24ACEA1B00B10433 /* ReactiveMoya.framework */; };
+		46FD212024ACEA1B00B10433 /* ReactiveMoya.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD211E24ACEA1B00B10433 /* ReactiveMoya.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46FD212224ACEA8700B10433 /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD212124ACEA8600B10433 /* Runes.framework */; };
+		46FD212324ACEA8700B10433 /* Runes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FD212124ACEA8600B10433 /* Runes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,9 +50,16 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				46FD211924ACE62200B10433 /* Curry.framework in Embed Frameworks */,
+				46FD210524ACCE0F00B10433 /* ReactiveSwift.framework in Embed Frameworks */,
+				46FD210424ACCE0C00B10433 /* RxSwift.framework in Embed Frameworks */,
+				46FD210324ACCE0800B10433 /* Moya.framework in Embed Frameworks */,
 				46F35F2C24ACB62D00DC92C3 /* netfox_ios.framework in Embed Frameworks */,
+				46FD212024ACEA1B00B10433 /* ReactiveMoya.framework in Embed Frameworks */,
 				46F35F2E24ACB62D00DC92C3 /* Alamofire.framework in Embed Frameworks */,
 				46F35F3424ACBB5E00DC92C3 /* Kingfisher.framework in Embed Frameworks */,
+				46FD212324ACEA8700B10433 /* Runes.framework in Embed Frameworks */,
+				46FD211624ACDAC300B10433 /* Argo.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,6 +78,21 @@
 		46F35F2924ACB62D00DC92C3 /* netfox_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = netfox_ios.framework; path = Carthage/Build/iOS/netfox_ios.framework; sourceTree = "<group>"; };
 		46F35F2A24ACB62D00DC92C3 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		46F35F3324ACBB5E00DC92C3 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		46FD20FD24ACCD5200B10433 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
+		46FD20FF24ACCD5800B10433 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		46FD210124ACCD6100B10433 /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
+		46FD210724ACCEBF00B10433 /* APIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProvider.swift; sourceTree = "<group>"; };
+		46FD210924ACCF2500B10433 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		46FD210B24ACCFCF00B10433 /* APIFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFactory.swift; sourceTree = "<group>"; };
+		46FD210D24ACD05A00B10433 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		46FD210F24ACD24200B10433 /* ServiceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPI.swift; sourceTree = "<group>"; };
+		46FD211224ACD3C000B10433 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		46FD211424ACDAC300B10433 /* Argo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Argo.framework; path = Carthage/Build/iOS/Argo.framework; sourceTree = "<group>"; };
+		46FD211724ACE62200B10433 /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Curry.framework; path = Carthage/Build/iOS/Curry.framework; sourceTree = "<group>"; };
+		46FD211A24ACE70700B10433 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		46FD211C24ACE97500B10433 /* APIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
+		46FD211E24ACEA1B00B10433 /* ReactiveMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveMoya.framework; path = Carthage/Build/iOS/ReactiveMoya.framework; sourceTree = "<group>"; };
+		46FD212124ACEA8600B10433 /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Runes.framework; path = Carthage/Build/iOS/Runes.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +100,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46FD211824ACE62200B10433 /* Curry.framework in Frameworks */,
 				46F35F2B24ACB62D00DC92C3 /* netfox_ios.framework in Frameworks */,
 				46F35F2D24ACB62D00DC92C3 /* Alamofire.framework in Frameworks */,
 				464F098F24ACBF2100EA7C14 /* Kingfisher.framework in Frameworks */,
+				46FD20FE24ACCD5200B10433 /* ReactiveSwift.framework in Frameworks */,
+				46FD211F24ACEA1B00B10433 /* ReactiveMoya.framework in Frameworks */,
+				46FD210024ACCD5800B10433 /* RxSwift.framework in Frameworks */,
+				46FD210224ACCD6100B10433 /* Moya.framework in Frameworks */,
+				46FD212224ACEA8700B10433 /* Runes.framework in Frameworks */,
+				46FD211524ACDAC300B10433 /* Argo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +136,8 @@
 		46F35F1324ACAD1300DC92C3 /* MovieKita */ = {
 			isa = PBXGroup;
 			children = (
+				46FD211124ACD3A400B10433 /* Model */,
+				46FD210624ACCE9600B10433 /* API */,
 				46F35F1424ACAD1300DC92C3 /* AppDelegate.swift */,
 				46F35F1624ACAD1300DC92C3 /* SceneDelegate.swift */,
 				46F35F1824ACAD1300DC92C3 /* ViewController.swift */,
@@ -99,11 +152,40 @@
 		46F35F2824ACB62D00DC92C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46FD212124ACEA8600B10433 /* Runes.framework */,
+				46FD211E24ACEA1B00B10433 /* ReactiveMoya.framework */,
+				46FD211724ACE62200B10433 /* Curry.framework */,
+				46FD211424ACDAC300B10433 /* Argo.framework */,
+				46FD210124ACCD6100B10433 /* Moya.framework */,
+				46FD20FF24ACCD5800B10433 /* RxSwift.framework */,
+				46FD20FD24ACCD5200B10433 /* ReactiveSwift.framework */,
 				46F35F3324ACBB5E00DC92C3 /* Kingfisher.framework */,
 				46F35F2A24ACB62D00DC92C3 /* Alamofire.framework */,
 				46F35F2924ACB62D00DC92C3 /* netfox_ios.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46FD210624ACCE9600B10433 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				46FD210724ACCEBF00B10433 /* APIProvider.swift */,
+				46FD210924ACCF2500B10433 /* API.swift */,
+				46FD210B24ACCFCF00B10433 /* APIFactory.swift */,
+				46FD210D24ACD05A00B10433 /* Constants.swift */,
+				46FD210F24ACD24200B10433 /* ServiceAPI.swift */,
+				46FD211A24ACE70700B10433 /* APIError.swift */,
+				46FD211C24ACE97500B10433 /* APIHelper.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		46FD211124ACD3A400B10433 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				46FD211224ACD3C000B10433 /* Token.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +268,13 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/netfox_ios.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Moya.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Argo.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Curry.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveMoya.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Runes.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -204,9 +293,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46FD211324ACD3C000B10433 /* Token.swift in Sources */,
 				46F35F1924ACAD1300DC92C3 /* ViewController.swift in Sources */,
 				46F35F1524ACAD1300DC92C3 /* AppDelegate.swift in Sources */,
+				46FD211B24ACE70700B10433 /* APIError.swift in Sources */,
+				46FD210824ACCEBF00B10433 /* APIProvider.swift in Sources */,
 				46F35F1724ACAD1300DC92C3 /* SceneDelegate.swift in Sources */,
+				46FD210E24ACD05A00B10433 /* Constants.swift in Sources */,
+				46FD210A24ACCF2500B10433 /* API.swift in Sources */,
+				46FD211024ACD24200B10433 /* ServiceAPI.swift in Sources */,
+				46FD211D24ACE97500B10433 /* APIHelper.swift in Sources */,
+				46FD210C24ACCFCF00B10433 /* APIFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

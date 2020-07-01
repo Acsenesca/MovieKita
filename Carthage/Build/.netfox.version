@@ -3,7 +3,7 @@
   "iOS" : [
     {
       "name" : "netfox_ios",
-      "hash" : "7ef273c14e7461c166791196212c0e9671c2ce18777400949f645e0b2dfa2e94",
+      "hash" : "70d39395e0a3b5fef37b5f92ed4fce58ccffd03d5706df80f951809bbe05a2b5",
       "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]

@@ -1,3 +1,7 @@
 github "Alamofire/Alamofire"
 github "kasketis/netfox"
 github "onevcat/Kingfisher"
+github "ReactiveCocoa/ReactiveSwift"
+github "Moya/Moya"
+github "thoughtbot/Argo"
+github "thoughtbot/Curry"
