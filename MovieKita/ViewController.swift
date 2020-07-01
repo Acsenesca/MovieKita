@@ -7,14 +7,30 @@
 //
 
 import UIKit
+import netfox_ios
 
 class ViewController: UIViewController {
-
+	@IBOutlet weak var button: UIButton!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		button.addTarget(self, action: #selector(self.buttonTapped), for: .touchUpInside)
+
+		NFX.sharedInstance().start()
+
 		// Do any additional setup after loading the view.
 	}
 
+	@objc func buttonTapped(sender : UIButton) {
+		print("haloo")
+		
+		ServiceAPI.requestToken()
+		.startWithResult({ result in
+			print(result)
+		})
 
+		//Write button action here
+	}
 }
 

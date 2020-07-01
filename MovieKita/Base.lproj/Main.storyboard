@@ -24,10 +24,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="button" destination="Fnm-Oz-gva" id="hJ3-Yj-okV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="126"/>
+            <point key="canvasLocation" x="137.68115942028987" y="125.89285714285714"/>
         </scene>
     </scenes>
 </document>
