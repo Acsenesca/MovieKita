@@ -1,0 +1,10 @@
+{
+  "commitish" : "1.19.0",
+  "iOS" : [
+    {
+      "name" : "netfox_ios",
+      "hash" : "05040d2ef3cb72635ecec1b074637f638508f10875a4ecc8e4aa4dd026daa171",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+    }
+  ]
+}

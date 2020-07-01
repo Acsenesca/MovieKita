@@ -1,0 +1,20 @@
+{
+  "commitish" : "14.0.0",
+  "iOS" : [
+    {
+      "name" : "RxMoya",
+      "hash" : "527695d13a8be5ddaa22981f7b3d65b2fc3b2dfee4a7242263d8254172ec4df3",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+    },
+    {
+      "name" : "ReactiveMoya",
+      "hash" : "4073b38ce0572e1559209e18adcb27b6eefc46c8776005e176214dcca3e78438",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+    },
+    {
+      "name" : "Moya",
+      "hash" : "cd061f56353014bc7411ac831283f229deb18e9f1ada282fd7c75c7a0f195fba",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+    }
+  ]
+}
