@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		464F098F24ACBF2100EA7C14 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F35F3324ACBB5E00DC92C3 /* Kingfisher.framework */; };
 		46F35F1524ACAD1300DC92C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F35F1424ACAD1300DC92C3 /* AppDelegate.swift */; };
 		46F35F1724ACAD1300DC92C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F35F1624ACAD1300DC92C3 /* SceneDelegate.swift */; };
 		46F35F1924ACAD1300DC92C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F35F1824ACAD1300DC92C3 /* ViewController.swift */; };
@@ -57,6 +58,7 @@
 			files = (
 				46F35F2B24ACB62D00DC92C3 /* netfox_ios.framework in Frameworks */,
 				46F35F2D24ACB62D00DC92C3 /* Alamofire.framework in Frameworks */,
+				464F098F24ACBF2100EA7C14 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +68,6 @@
 		46F35F0824ACAD1300DC92C3 = {
 			isa = PBXGroup;
 			children = (
-				46F35F3324ACBB5E00DC92C3 /* Kingfisher.framework */,
 				46F35F1324ACAD1300DC92C3 /* MovieKita */,
 				46F35F1224ACAD1300DC92C3 /* Products */,
 				46F35F2824ACB62D00DC92C3 /* Frameworks */,
@@ -98,6 +99,7 @@
 		46F35F2824ACB62D00DC92C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46F35F3324ACBB5E00DC92C3 /* Kingfisher.framework */,
 				46F35F2A24ACB62D00DC92C3 /* Alamofire.framework */,
 				46F35F2924ACB62D00DC92C3 /* netfox_ios.framework */,
 			);
@@ -355,6 +357,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = MovieKita/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -362,7 +365,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.testflight.MovieKita;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -377,6 +380,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = MovieKita/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -384,7 +388,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.testflight.MovieKita;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
