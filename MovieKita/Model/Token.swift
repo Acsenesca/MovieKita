@@ -12,16 +12,16 @@ import Curry
 import Runes
 
 struct Token {
-    let success: Bool
-    let expiresAt: String
+	let success: Bool
+	let expiresAt: String
 	let requestToken: String
 }
 
-extension Token:Argo.Decodable {
-    public static func decode(_ json: JSON) -> Decoded<Token> {
-        return curry(self.init)
-            <^> (json <| "success") as Decoded<Bool>
-            <*> (json <| "expires_at") as Decoded<String>
+extension Token: Argo.Decodable {
+	public static func decode(_ json: JSON) -> Decoded<Token> {
+		return curry(self.init)
+			<^> (json <| "success") as Decoded<Bool>
+			<*> (json <| "expires_at") as Decoded<String>
 			<*> (json <| "request_token") as Decoded<String>
 	}
 }
