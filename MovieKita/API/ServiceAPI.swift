@@ -139,9 +139,13 @@ func request<T: APITarget, S: Argo.Decodable> (_ API: T, provider: MoyaProvider<
 }
 
 struct ServiceAPI {
-
-    //MARK:- TOKEN
+	//MARK:- TOKEN
 	static func requestToken() -> SignalProducer<Token?, APIError> {
 		return request(API.Token, provider: APIProvider, jsonObject: { JSONObjectWithData(data: $0) })
-    }
+	}
+	
+	//MARK:- LIST MOVIE
+	static func requestListMovie(movieFilterType: MovieFilterType) -> SignalProducer<ListMovie?, APIError> {
+		return request(API.ListMovie(movieFilterType: movieFilterType), provider: APIProvider, jsonObject: { JSONObjectWithData(data: $0) })
+	}
 }
