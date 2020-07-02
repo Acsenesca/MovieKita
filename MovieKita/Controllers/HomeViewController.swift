@@ -16,8 +16,8 @@ class HomeViewModel: ViewModel {
 	
 	init() {}
 	
-	func requestListMovie() {
-		ServiceAPI.requestListMovie(movieFilterType: .Popular)
+	func requestListMovie(movieFilterType: MovieFilterType) {
+		ServiceAPI.requestListMovie(movieFilterType: movieFilterType)
 			.on(started: { () -> () in
 				//				PKHUD.sharedHUD.contentView = PKHUDProgressView()
 				//				PKHUD.sharedHUD.show()
@@ -31,6 +31,7 @@ class HomeViewModel: ViewModel {
 				if let listMovie = result.value() {
 					self?.listMovie.value = listMovie
 				}
+				
 				self?.reloadDataHandler()
 		}
 	}
@@ -67,6 +68,12 @@ class HomeViewController: UIViewController {
 	lazy var collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: self.collectionViewLayout)
 	private var collectionViewBinding: CollectionViewBindingUtil<HomeViewModel>?
 	
+	lazy var filterView: FilterView = {
+		let view = FilterView.viewFromXib()
+		
+		return view
+	}()
+	
 	init(viewModel: HomeViewModel) {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
@@ -84,8 +91,10 @@ class HomeViewController: UIViewController {
 		self.bindViewModel()
 		self.configureCollectionView()
 		self.configureNavigation()
+		self.configureFilterView()
+		self.configureNotification()
 		
-		self.viewModel.requestListMovie()
+		self.viewModel.requestListMovie(movieFilterType: .Popular)
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -103,15 +112,66 @@ class HomeViewController: UIViewController {
 	}
 	
 	fileprivate func configureCollectionView() {
-		view.addSubview(collectionView)
+		view.addSubview(self.collectionView)
 		
-		collectionView.backgroundView?.backgroundColor = UIColor.white
-		collectionView.backgroundColor = UIColor.primaryColor
-		collectionViewLayout.scrollDirection = .vertical
-		collectionView.register(MainMovieCell.nib(), forCellWithReuseIdentifier: MainMovieCell.identifier())
+		let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+		let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+		let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
+		let verticalPadding: CGFloat = 16
+		
+		self.collectionView.backgroundView?.backgroundColor = UIColor.white
+		self.collectionView.backgroundColor = UIColor.primaryColor
+		self.collectionViewLayout.scrollDirection = .vertical
+		self.collectionView.contentInset = UIEdgeInsets(
+			top: verticalPadding + filterView.frame.height,
+			left: 0,
+			bottom: navigationBarHeight + statusBarHeight + verticalPadding,
+			right: 0
+		)
+		
+		self.collectionView.scrollIndicatorInsets = self.collectionView.contentInset
+		self.collectionView.register(MainMovieCell.nib(), forCellWithReuseIdentifier: MainMovieCell.identifier())
 	}
 	
 	fileprivate func configureNavigation() {
 		self.navigationItem.title = "Movie Kita"
+	}
+	
+	fileprivate func configureFilterView() {
+		let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+		let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+		let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
+		
+		self.filterView.frame.size =  CGSize(width: filterView.frame.width, height: filterView.frame.height + statusBarHeight + navigationBarHeight)
+		view.addSubview(filterView)
+	}
+	
+	fileprivate func configureNotification() {
+		NotificationCenter.default.addObserver(forName: .filterTapped, object: nil, queue: nil, using: {[weak self] (notification) -> Void in
+			self?.configureSheetAction()
+		})
+	}
+	
+	fileprivate func configureSheetAction() {
+		let alert = UIAlertController(title: nil, message: "Please Select an Option", preferredStyle: .actionSheet)
+		
+		alert.addAction(UIAlertAction(title: MovieFilterType.Popular.rawValue(), style: .default , handler:{ (UIAlertAction)in
+			self.viewModel.requestListMovie(movieFilterType: .Popular)
+			NotificationCenter.default.post(name: .filterNameChanged, object: MovieFilterType.Popular.rawValue())
+		}))
+		
+		alert.addAction(UIAlertAction(title: MovieFilterType.TopRated.rawValue(), style: .default , handler:{ (UIAlertAction)in
+			self.viewModel.requestListMovie(movieFilterType: .TopRated)
+			NotificationCenter.default.post(name: .filterNameChanged, object: MovieFilterType.TopRated.rawValue())
+		}))
+		
+		alert.addAction(UIAlertAction(title: MovieFilterType.NowPlaying.rawValue(), style: .default , handler:{ (UIAlertAction)in
+			self.viewModel.requestListMovie(movieFilterType: .NowPlaying)
+			NotificationCenter.default.post(name: .filterNameChanged, object: MovieFilterType.NowPlaying.rawValue())
+		}))
+		
+		alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+		
+		self.present(alert, animated: true, completion: nil)
 	}
 }

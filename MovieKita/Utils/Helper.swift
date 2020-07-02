@@ -65,3 +65,8 @@ extension UIColor {
 	static let primaryColor = UIColor(red: 249.0/255.0, green: 188.0/255.0, blue: 80.0/255.0, alpha: 1)
 	static let secondaryColor = UIColor(red: 0.976, green: 0.976, blue: 0.976, alpha: 1)
 }
+
+extension NSNotification.Name {
+	static let filterTapped = NSNotification.Name("filterTapped")
+	static let filterNameChanged = NSNotification.Name("filterNameChanged")
+}

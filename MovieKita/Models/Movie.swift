@@ -26,6 +26,17 @@ enum MovieFilterType: String {
 			return "undefined"
 		}
 	}
+	
+	func rawValue() -> String {
+		switch self {
+		case .Popular: return "Popular"
+		case .TopRated: return "Top Rated"
+		case .NowPlaying: return "Now Playing"
+		default:
+			return "undefined"
+		}
+	}
+
 }
 
 struct ListMovie {
