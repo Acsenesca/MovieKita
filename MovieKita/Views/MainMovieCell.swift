@@ -38,7 +38,7 @@ class MainMovieCell: UICollectionViewCell, ViewBinding {
 	}
 	
 	override func viewSize() -> CGSize {
-		return CGSize(width: self.frame.size.width, height: 148)
+		return CGSize(width: UIScreen.main.bounds.width - 32, height: 148)
 	}
 	
 	func bindViewModel(viewModel: VM?) {
