@@ -13,13 +13,19 @@ import Moya
 enum API {
 	case Token
 	case ListMovie(movieFilterType: MovieFilterType)
-
+	case MovieDetail(movieId: Int)
+	case ListMovieReview(movieId: Int)
+	
 	func factory() -> APIFactoryable {
 		switch self {
 		case .Token:
 			return APIToken()
 		case .ListMovie(let movieFilterType):
 			return APIListMovie(movieFilterType: movieFilterType)
+		case .MovieDetail(let movieId):
+			return APIMovieDetail(movieId: movieId)
+		case .ListMovieReview(let movieId):
+			return APIListMovieReview(movieId: movieId)
 		}
 	}
 }
@@ -85,6 +91,40 @@ struct APIListMovie: APIFactoryable {
 	
 	var path: String {
 		return "/movie/\(movieFilterType.description())"
+	}
+	var method: Moya.Method {
+		return .get
+	}
+	var task: Task {
+		let parameters = [ "api_key": APIKey ]
+		
+		return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+	}
+}
+
+//MARK:- MOVIE DETAIL
+struct APIMovieDetail: APIFactoryable {
+	let movieId: Int
+	
+	var path: String {
+		return "/movie/\(movieId)"
+	}
+	var method: Moya.Method {
+		return .get
+	}
+	var task: Task {
+		let parameters = [ "api_key": APIKey ]
+		
+		return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+	}
+}
+
+//MARK:- LIST MOVIE REVIEW
+struct APIListMovieReview: APIFactoryable {
+	let movieId: Int
+	
+	var path: String {
+		return "/movie/\(movieId)/reviews"
 	}
 	var method: Moya.Method {
 		return .get
