@@ -25,7 +25,7 @@ class ViewController: UIViewController {
 	@objc func buttonTapped(sender : UIButton) {
 		print("haloo")
 		
-		ServiceAPI.requestToken()
+		ServiceAPI.requestListMovie(movieFilterType: .Popular)
 		.startWithResult({ result in
 			print(result)
 		})

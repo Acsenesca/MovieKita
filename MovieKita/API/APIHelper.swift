@@ -11,28 +11,28 @@ import ReactiveSwift
 import Moya
 
 extension SignalProducerProtocol where Value == Response, Error == APIError {
-    func filterResponseCode(range:ClosedRange<Int>) -> SignalProducer<Value, Error> {
-        return producer.attemptMap({ (response) in
-            return response.filterResponseCode(range: range)
-        })
-    }
+	func filterResponseCode(range:ClosedRange<Int>) -> SignalProducer<Value, Error> {
+		return producer.attemptMap({ (response) in
+			return response.filterResponseCode(range: range)
+		})
+	}
 }
 
 extension Response {
-    func filterResponseCode(range:ClosedRange<Int>) -> Result<Response,APIError> {
-        if range.contains(self.statusCode) {
-            return .success(self)
-        } else {
-            return .failure(APIErrorFactory(response:self))
-        }
-    }
+	func filterResponseCode(range:ClosedRange<Int>) -> Result<Response,APIError> {
+		if range.contains(self.statusCode) {
+			return .success(self)
+		} else {
+			return .failure(APIErrorFactory(response:self))
+		}
+	}
 }
 
 extension Swift.Result {
-    func value() -> Success? {
-        switch self {
-        case .success(let success): return success
-        case .failure(_): return nil
-        }
-    }
+	func value() -> Success? {
+		switch self {
+		case .success(let success): return success
+		case .failure(_): return nil
+		}
+	}
 }
