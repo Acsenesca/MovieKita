@@ -27,11 +27,6 @@ func JSONObjectWithData(data: Data) -> [String: Any]? {
 	return .none
 }
 
-func dataManager(_ data: Data) -> Any? {
-	guard let d = JSONObjectWithData(data: data)?["data"] else { return nil }
-	return d as Any?
-}
-
 func backgroundDecodeSignalWithReponse<T: Argo.Decodable>(jsonData: Any?, response: Response) -> SignalProducer<(Response, T?)?, APIError> where T.DecodedType == T {
 	return SignalProducer { observer, requestDisposable in
 		DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
@@ -139,9 +134,23 @@ func request<T: APITarget, S: Argo.Decodable> (_ API: T, provider: MoyaProvider<
 }
 
 struct ServiceAPI {
-
-    //MARK:- TOKEN
+	//MARK:- TOKEN
 	static func requestToken() -> SignalProducer<Token?, APIError> {
 		return request(API.Token, provider: APIProvider, jsonObject: { JSONObjectWithData(data: $0) })
-    }
+	}
+	
+	//MARK:- LIST MOVIE
+	static func requestListMovie(movieFilterType: MovieFilterType) -> SignalProducer<ListMovie?, APIError> {
+		return request(API.ListMovie(movieFilterType: movieFilterType), provider: APIProvider, jsonObject: { JSONObjectWithData(data: $0) })
+	}
+	
+	//MARK:- MOVIE DETAIL
+	static func requestMovieDetail(movieId: Int) -> SignalProducer<Movie?, APIError> {
+		return request(API.MovieDetail(movieId: movieId), provider: APIProvider, jsonObject: { JSONObjectWithData(data: $0) })
+	}
+	
+	//MARK:- LIST MOVIE REVIEW
+	static func requestMovieReview(movieId: Int) -> SignalProducer<ListReview?, APIError> {
+		return request(API.ListMovieReview(movieId: movieId), provider: APIProvider, jsonObject: { JSONObjectWithData(data: $0) })
+	}
 }

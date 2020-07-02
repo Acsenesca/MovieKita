@@ -13,15 +13,15 @@ import Moya
 let APIProvider: MoyaProvider<API> = mainProvider()
 
 func mainProvider<T:APITarget>() -> MoyaProvider<T> {
-    return MoyaProvider(endpointClosure: endPointProvider)
+	return MoyaProvider(endpointClosure: endPointProvider)
 }
 
 func testProvider<T:APITarget>() -> MoyaProvider<T> {
-    return MoyaProvider(stubClosure: MoyaProvider.immediatelyStub)
+	return MoyaProvider(stubClosure: MoyaProvider.immediatelyStub)
 }
 
 func localProvider<T:APITarget>() -> MoyaProvider<T> {
-   return MoyaProvider(
+	return MoyaProvider(
 		endpointClosure: endPointProvider,
 		stubClosure: MoyaProvider.immediatelyStub
 	)
@@ -29,11 +29,11 @@ func localProvider<T:APITarget>() -> MoyaProvider<T> {
 
 //MARK:- endpoint
 func endPointProvider<T:APITarget>(target:T) -> Endpoint {
-    let url = target.baseURL.appendingPathComponent(target.path).absoluteString
-    return Endpoint(
-        url: url,
-        sampleResponseClosure: {.networkResponse(200,target.sampleData)},
-        method: target.method,
-        task: target.task,
-        httpHeaderFields:target.headers)
+	let url = target.baseURL.appendingPathComponent(target.path).absoluteString
+	return Endpoint(
+		url: url,
+		sampleResponseClosure: {.networkResponse(200, target.sampleData)},
+		method: target.method,
+		task: target.task,
+		httpHeaderFields: target.headers)
 }

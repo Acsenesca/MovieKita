@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		464F098F24ACBF2100EA7C14 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F35F3324ACBB5E00DC92C3 /* Kingfisher.framework */; };
+		46EA175224AD7D7A0062E334 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA175124AD7D7A0062E334 /* Movie.swift */; };
 		46F35F1524ACAD1300DC92C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F35F1424ACAD1300DC92C3 /* AppDelegate.swift */; };
 		46F35F1724ACAD1300DC92C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F35F1624ACAD1300DC92C3 /* SceneDelegate.swift */; };
 		46F35F1924ACAD1300DC92C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F35F1824ACAD1300DC92C3 /* ViewController.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		46EA175124AD7D7A0062E334 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		46F35F1124ACAD1300DC92C3 /* MovieKita.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieKita.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46F35F1424ACAD1300DC92C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46F35F1624ACAD1300DC92C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				46FD211224ACD3C000B10433 /* Token.swift */,
+				46EA175124AD7D7A0062E334 /* Movie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			files = (
 				46FD211324ACD3C000B10433 /* Token.swift in Sources */,
 				46F35F1924ACAD1300DC92C3 /* ViewController.swift in Sources */,
+				46EA175224AD7D7A0062E334 /* Movie.swift in Sources */,
 				46F35F1524ACAD1300DC92C3 /* AppDelegate.swift in Sources */,
 				46FD211B24ACE70700B10433 /* APIError.swift in Sources */,
 				46FD210824ACCEBF00B10433 /* APIProvider.swift in Sources */,
