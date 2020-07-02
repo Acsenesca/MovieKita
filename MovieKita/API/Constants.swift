@@ -10,3 +10,4 @@ import Foundation
 
 let APIKey = "379a51ee272165aee20c84afe3ae01db"
 let APIUrl = "https://api.themoviedb.org/3"
+let imageBaseUrl = "https://image.tmdb.org/t/p/w500"
