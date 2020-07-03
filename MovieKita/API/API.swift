@@ -14,7 +14,7 @@ enum API {
 	case Token
 	case ListMovie(movieFilterType: MovieFilterType, page: Int?)
 	case MovieDetail(movieId: Int)
-	case ListMovieReview(movieId: Int)
+	case ListMovieReview(movieId: Int, page: Int?)
 	
 	func factory() -> APIFactoryable {
 		switch self {
@@ -24,8 +24,8 @@ enum API {
 			return APIListMovie(movieFilterType: movieFilterType, page: page)
 		case .MovieDetail(let movieId):
 			return APIMovieDetail(movieId: movieId)
-		case .ListMovieReview(let movieId):
-			return APIListMovieReview(movieId: movieId)
+		case .ListMovieReview(let movieId, let page):
+			return APIListMovieReview(movieId: movieId, page: page)
 		}
 	}
 }
@@ -131,6 +131,7 @@ struct APIMovieDetail: APIFactoryable {
 //MARK:- LIST MOVIE REVIEW
 struct APIListMovieReview: APIFactoryable {
 	let movieId: Int
+	let page: Int?
 	
 	var path: String {
 		return "/movie/\(movieId)/reviews"
@@ -139,7 +140,15 @@ struct APIListMovieReview: APIFactoryable {
 		return .get
 	}
 	var task: Task {
-		let parameters = [ "api_key": APIKey ]
+		var dict: [String: Any] = [
+			"api_key": APIKey,
+		]
+		
+		if let page = self.page {
+            dict["page"] = page
+        }
+		
+		let parameters = dict
 		
 		return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
 	}

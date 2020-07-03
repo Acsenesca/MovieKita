@@ -14,6 +14,11 @@
 		462FB36024AEE317001A165F /* ESPullToRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 462FB35F24AEE317001A165F /* ESPullToRefresh.framework */; };
 		462FB36124AEE317001A165F /* ESPullToRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 462FB35F24AEE317001A165F /* ESPullToRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		464F098F24ACBF2100EA7C14 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F35F3324ACBB5E00DC92C3 /* Kingfisher.framework */; };
+		4685756824AF400600726589 /* DetailMovieView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4685756724AF400500726589 /* DetailMovieView.xib */; };
+		4685756A24AF404400726589 /* DetailMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4685756924AF404400726589 /* DetailMovieView.swift */; };
+		4685756C24AF512300726589 /* HomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4685756B24AF512300726589 /* HomeDetailViewController.swift */; };
+		4685756E24AF62B700726589 /* ReviewMovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4685756D24AF62B700726589 /* ReviewMovieCell.xib */; };
+		4685757024AF634100726589 /* ReviewMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4685756F24AF634100726589 /* ReviewMovieCell.swift */; };
 		46EA175224AD7D7A0062E334 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA175124AD7D7A0062E334 /* Movie.swift */; };
 		46EA175624ADBCAF0062E334 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA175524ADBCAF0062E334 /* ViewModel.swift */; };
 		46EA175824ADBD470062E334 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA175724ADBD470062E334 /* Helper.swift */; };
@@ -91,6 +96,11 @@
 		462FB35824AE4116001A165F /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		462FB35B24AEC5BD001A165F /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		462FB35F24AEE317001A165F /* ESPullToRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ESPullToRefresh.framework; path = Carthage/Build/iOS/ESPullToRefresh.framework; sourceTree = "<group>"; };
+		4685756724AF400500726589 /* DetailMovieView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailMovieView.xib; sourceTree = "<group>"; };
+		4685756924AF404400726589 /* DetailMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieView.swift; sourceTree = "<group>"; };
+		4685756B24AF512300726589 /* HomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailViewController.swift; sourceTree = "<group>"; };
+		4685756D24AF62B700726589 /* ReviewMovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewMovieCell.xib; sourceTree = "<group>"; };
+		4685756F24AF634100726589 /* ReviewMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewMovieCell.swift; sourceTree = "<group>"; };
 		468AD9B924AEEAC2004B2953 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		46EA175124AD7D7A0062E334 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		46EA175524ADBCAF0062E334 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -157,6 +167,7 @@
 			children = (
 				462FB35224AE0BDA001A165F /* NavigationController.swift */,
 				462FB35424AE0C0B001A165F /* HomeViewController.swift */,
+				4685756B24AF512300726589 /* HomeDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -180,6 +191,10 @@
 				46EA176224ADDC9B0062E334 /* MainMovieCell.swift */,
 				462FB35624AE3DF9001A165F /* FilterView.xib */,
 				462FB35824AE4116001A165F /* FilterView.swift */,
+				4685756724AF400500726589 /* DetailMovieView.xib */,
+				4685756924AF404400726589 /* DetailMovieView.swift */,
+				4685756D24AF62B700726589 /* ReviewMovieCell.xib */,
+				4685756F24AF634100726589 /* ReviewMovieCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,7 +341,9 @@
 			files = (
 				462FB35724AE3DF9001A165F /* FilterView.xib in Resources */,
 				46F35F2124ACAD1800DC92C3 /* LaunchScreen.storyboard in Resources */,
+				4685756824AF400600726589 /* DetailMovieView.xib in Resources */,
 				46F35F1E24ACAD1800DC92C3 /* Assets.xcassets in Resources */,
+				4685756E24AF62B700726589 /* ReviewMovieCell.xib in Resources */,
 				46F35F1C24ACAD1300DC92C3 /* Main.storyboard in Resources */,
 				46EA176124ADC2F60062E334 /* MainMovieCell.xib in Resources */,
 			);
@@ -375,6 +392,7 @@
 			files = (
 				46FD211324ACD3C000B10433 /* Token.swift in Sources */,
 				46EA176324ADDC9B0062E334 /* MainMovieCell.swift in Sources */,
+				4685756A24AF404400726589 /* DetailMovieView.swift in Sources */,
 				46EA175824ADBD470062E334 /* Helper.swift in Sources */,
 				46F35F1924ACAD1300DC92C3 /* ViewController.swift in Sources */,
 				46EA175224AD7D7A0062E334 /* Movie.swift in Sources */,
@@ -390,7 +408,9 @@
 				46FD210E24ACD05A00B10433 /* Constants.swift in Sources */,
 				46FD210A24ACCF2500B10433 /* API.swift in Sources */,
 				462FB35524AE0C0B001A165F /* HomeViewController.swift in Sources */,
+				4685757024AF634100726589 /* ReviewMovieCell.swift in Sources */,
 				46FD211024ACD24200B10433 /* ServiceAPI.swift in Sources */,
+				4685756C24AF512300726589 /* HomeDetailViewController.swift in Sources */,
 				46FD211D24ACE97500B10433 /* APIHelper.swift in Sources */,
 				46EA175A24ADBE070062E334 /* CollectionViewBindingUtil.swift in Sources */,
 				46FD210C24ACCFCF00B10433 /* APIFactory.swift in Sources */,

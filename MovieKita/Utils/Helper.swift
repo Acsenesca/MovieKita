@@ -51,13 +51,13 @@ extension UIView {
 	}
 }
 
-//MARK:- UITableView
-extension UITableViewCell {
-	override func viewSize() -> CGSize {
-		self.setNeedsLayout()
-		self.layoutIfNeeded()
-		return self.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-	}
+//MARK:- UICollectionView
+extension UICollectionViewCell {
+    override func viewSize() -> CGSize {
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+        return self.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    }
 }
 
 //MARK:- UIColor

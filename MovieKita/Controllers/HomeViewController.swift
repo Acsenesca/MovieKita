@@ -15,9 +15,10 @@ class HomeViewModel: ViewModel {
 	var listMovie: MutableProperty<ListMovie?> = MutableProperty(nil)
 	var movies: MutableProperty<[Movie]?> = MutableProperty(nil)
 	var selectedFilterType: MovieFilterType = .Popular
-	var lastId: Int?
 	var page: Int = 2
-	var reloadDataHandler: (() -> Void) = {}
+	
+	var reloadAllDataHandler: (() -> Void) = {}
+	var reloadDataHandler: (([IndexPath]) -> Void) = { _ in }
 	var didSelectHandler: ((Movie) -> Void) = {_ in }
 	
 	init() {}
@@ -25,27 +26,45 @@ class HomeViewModel: ViewModel {
 	func requestListMovie(movieFilterType: MovieFilterType) {
 		ServiceAPI.requestListMovie(movieFilterType: movieFilterType)
 			.startWithResult { [weak self] (result) in
-				if let listMovie = result.value() {
-					self?.listMovie.value = listMovie
-					self?.movies.value = listMovie?.results
-					self?.lastId = listMovie?.results?.last?.id
+				if let self = self, let listMovie = result.value() {
+					
+					self.listMovie.value = listMovie
+					self.movies.value = listMovie?.results
+					
+					var indexPaths: [IndexPath] = []
+					let endIndex = self.movies.value?.count ?? 0
+					
+					for index in 0 ..< endIndex {
+						let indexPath = IndexPath(item: index, section: 0)
+						indexPaths.append(indexPath)
+					}
+					
+					self.reloadDataHandler(indexPaths)
 				}
-				
-				self?.reloadDataHandler()
 		}
 	}
 	
 	func requestLoadMoreListMovie(movieFilterType: MovieFilterType) {
 		ServiceAPI.requestListMovie(movieFilterType: movieFilterType, page: page)
 			.startWithResult { [weak self] (result) in
-				if let listMovie = result.value() {
-					self?.listMovie.value = listMovie
-					self?.movies.value?.append(contentsOf: listMovie?.results ?? [])
-					self?.lastId = listMovie?.results?.last?.id
-					self?.page += 1
+				if let self = self, let listMovie = result.value() {
+					
+					var indexPaths: [IndexPath] = []
+					let startIndex = self.movies.value?.count ?? 0
+					
+					self.listMovie.value = listMovie
+					self.movies.value?.append(contentsOf: listMovie?.results ?? [])
+					self.page += 1
+					
+					let endIndex = self.movies.value?.count ?? 0
+					
+					for index in startIndex ..< endIndex {
+						let indexPath = IndexPath(item: index, section: 0)
+						indexPaths.append(indexPath)
+					}
+					
+					self.reloadDataHandler(indexPaths)
 				}
-				
-				self?.reloadDataHandler()
 		}
 	}
 	
@@ -76,7 +95,7 @@ extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, Select
 	}
 }
 
-class HomeViewController: UIViewController, UIScrollViewDelegate {
+class HomeViewController: UIViewController {
 	typealias VM = HomeViewModel
 	var viewModel: VM
 	
@@ -116,7 +135,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		self.viewModel.reloadDataHandler()
+		self.viewModel.reloadAllDataHandler()
 	}
 	
 	fileprivate func bindViewModel() {
@@ -124,10 +143,19 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 		collectionViewBinding?.bindFlowDelegateWithCollectionView(collectionView: collectionView)
 		collectionViewBinding?.bindDatasourceWithCollectionView(collectionView: collectionView)
 		
-		viewModel.reloadDataHandler = {[weak self] in
+		viewModel.reloadAllDataHandler = { [weak self] in
 			self?.collectionView.reloadData()
 			self?.refreshControl.endRefreshing()
 			self?.collectionView.es.stopLoadingMore()
+		}
+		
+		viewModel.reloadDataHandler = { [weak self] indexPaths in
+			self?.collectionView.performBatchUpdates({
+				self?.collectionView.insertItems(at: indexPaths)
+			}) { [weak self] _ in
+				self?.refreshControl.endRefreshing()
+				self?.collectionView.es.stopLoadingMore()
+			}
 		}
 		
 		self.collectionView.es.addInfiniteScrolling {
@@ -135,8 +163,11 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 			self.viewModel.requestLoadMoreListMovie(movieFilterType: self.viewModel.selectedFilterType)
 		}
 		
-		viewModel.didSelectHandler = {[weak self] user -> Void in
-
+		viewModel.didSelectHandler = { [weak self] movie -> Void in
+			let viewModel = HomeDetailViewModel(movie: movie)
+			let controller = HomeDetailViewController(viewModel: viewModel)
+			
+			self?.navigationController?.pushViewController(controller, animated: true)
 		}
 	}
 	

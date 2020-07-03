@@ -150,7 +150,7 @@ struct ServiceAPI {
 	}
 	
 	//MARK:- LIST MOVIE REVIEW
-	static func requestMovieReview(movieId: Int) -> SignalProducer<ListReview?, APIError> {
-		return request(API.ListMovieReview(movieId: movieId), provider: APIProvider, jsonObject: { JSONObjectWithData(data: $0) })
+	static func requestListMovieReview(movieId: Int, page: Int? = nil) -> SignalProducer<ListReview?, APIError> {
+		return request(API.ListMovieReview(movieId: movieId, page: page), provider: APIProvider, jsonObject: { JSONObjectWithData(data: $0) })
 	}
 }
