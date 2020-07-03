@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import ReactiveSwift
+import ESPullToRefresh
 
 class HomeViewModel: ViewModel {
 	var listMovie: MutableProperty<ListMovie?> = MutableProperty(nil)
@@ -49,7 +50,7 @@ class HomeViewModel: ViewModel {
 
 extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, SelectedCollectionSource {
 	func numberOfCollectionCellAtSection(section: Int) -> Int {
-		return self.listMovie.value?.results?.count ?? 0
+		return self.movies.value?.count ?? 0
 	}
 	func collectionCellIdentifierAtIndexPath(indexPath: IndexPath) -> String {
 		return MainMovieCell.identifier()
@@ -119,6 +120,12 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 		viewModel.reloadDataHandler = {[weak self] in
 			self?.collectionView.reloadData()
 			self?.refreshControl.endRefreshing()
+			self?.collectionView.es.stopLoadingMore()
+		}
+		
+		self.collectionView.es.addInfiniteScrolling {
+			[unowned self] in
+			self.viewModel.requestLoadMoreListMovie(movieFilterType: .Popular)
 		}
 	}
 	
