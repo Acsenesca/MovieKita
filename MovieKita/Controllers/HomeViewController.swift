@@ -14,6 +14,7 @@ import ESPullToRefresh
 class HomeViewModel: ViewModel {
 	var listMovie: MutableProperty<ListMovie?> = MutableProperty(nil)
 	var movies: MutableProperty<[Movie]?> = MutableProperty(nil)
+	var selectedFilterType: MovieFilterType = .Popular
 	var lastId: Int?
 	var page: Int = 2
 	var reloadDataHandler: (() -> Void) = {}
@@ -125,7 +126,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 		
 		self.collectionView.es.addInfiniteScrolling {
 			[unowned self] in
-			self.viewModel.requestLoadMoreListMovie(movieFilterType: .Popular)
+			self.viewModel.requestLoadMoreListMovie(movieFilterType: self.viewModel.selectedFilterType)
 		}
 	}
 	
@@ -160,7 +161,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 		let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
 		let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
 		
-		self.filterView.frame.size =  CGSize(width: filterView.frame.width, height: filterView.frame.height + statusBarHeight + navigationBarHeight)
+		self.filterView.frame.size =  CGSize(width: UIScreen.main.bounds.width, height: filterView.frame.height + statusBarHeight + navigationBarHeight)
 		view.addSubview(filterView)
 	}
 	
@@ -174,16 +175,19 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 		let alert = UIAlertController(title: nil, message: "Please Select an Option", preferredStyle: .actionSheet)
 		
 		alert.addAction(UIAlertAction(title: MovieFilterType.Popular.rawValue(), style: .default , handler:{ (UIAlertAction)in
+			self.viewModel.selectedFilterType = .Popular
 			self.viewModel.requestListMovie(movieFilterType: .Popular)
 			NotificationCenter.default.post(name: .filterNameChanged, object: MovieFilterType.Popular.rawValue())
 		}))
 		
 		alert.addAction(UIAlertAction(title: MovieFilterType.TopRated.rawValue(), style: .default , handler:{ (UIAlertAction)in
+			self.viewModel.selectedFilterType = .TopRated
 			self.viewModel.requestListMovie(movieFilterType: .TopRated)
 			NotificationCenter.default.post(name: .filterNameChanged, object: MovieFilterType.TopRated.rawValue())
 		}))
 		
 		alert.addAction(UIAlertAction(title: MovieFilterType.NowPlaying.rawValue(), style: .default , handler:{ (UIAlertAction)in
+			self.viewModel.selectedFilterType = .NowPlaying
 			self.viewModel.requestListMovie(movieFilterType: .NowPlaying)
 			NotificationCenter.default.post(name: .filterNameChanged, object: MovieFilterType.NowPlaying.rawValue())
 		}))
@@ -202,6 +206,6 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 	}
 	
 	@objc private func didPullToRefresh() {
-		self.viewModel.requestListMovie(movieFilterType: .Popular)
+		self.viewModel.requestListMovie(movieFilterType: self.viewModel.selectedFilterType)
 	}
 }
