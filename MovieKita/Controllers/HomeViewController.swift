@@ -14,6 +14,7 @@ import ESPullToRefresh
 class HomeViewModel: ViewModel {
 	var listMovie: MutableProperty<ListMovie?> = MutableProperty(nil)
 	var movies: MutableProperty<[Movie]?> = MutableProperty(nil)
+	var favMovies: MutableProperty<[Movie]?> = MutableProperty(nil)
 	var selectedFilterType: MovieFilterType = .Popular
 	var page: Int = 2
 	
@@ -70,13 +71,21 @@ class HomeViewModel: ViewModel {
 
 extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, SelectedCollectionSource {
 	func numberOfCollectionCellAtSection(section: Int) -> Int {
-		return self.movies.value?.count ?? 0
+		if selectedFilterType == .Favourite {
+			return self.favMovies.value?.count ?? 0
+		} else {
+			return self.movies.value?.count ?? 0
+		}
 	}
 	func collectionCellIdentifierAtIndexPath(indexPath: IndexPath) -> String {
 		return MainMovieCell.identifier()
 	}
 	func collectionCellModelAtIndexPath(indexPath: IndexPath) -> ViewModel {
-		return MainMovieCellModel(movie: self.movies.value?[indexPath.row])
+		if selectedFilterType == .Favourite {
+			return MainMovieCellModel(movie: self.favMovies.value?[indexPath.row])
+		} else {
+			return MainMovieCellModel(movie: self.movies.value?[indexPath.row])
+		}
 	}
 	func cellClassAtIndexPath(indexPath: IndexPath) -> UICollectionViewCell.Type {
 		return MainMovieCell.self
@@ -98,12 +107,6 @@ class HomeViewController: UIViewController {
 	private var collectionViewBinding: CollectionViewBindingUtil<HomeViewModel>?
 	private let refreshControl = UIRefreshControl()
 	
-	lazy var filterView: FilterView = {
-		let view = FilterView.viewFromXib()
-		
-		return view
-	}()
-	
 	init(viewModel: HomeViewModel) {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
@@ -121,7 +124,6 @@ class HomeViewController: UIViewController {
 		self.bindViewModel()
 		self.configureCollectionView()
 		self.configureNavigation()
-		self.configureFilterView()
 		self.configureNotification()
 		self.configureRefreshControl()
 		
@@ -138,6 +140,7 @@ class HomeViewController: UIViewController {
 		collectionViewBinding?.bindDatasourceWithCollectionView(collectionView: collectionView)
 		
 		viewModel.batchUpdateHandler = { [weak self] in
+			self?.navigationItem.titleView = self?.setTitle(title: "Movie Kita", subtitle: self?.viewModel.selectedFilterType.rawValue() ?? "")
 			self?.collectionView.reloadData()
 			self?.refreshControl.endRefreshing()
 			self?.collectionView.es.stopLoadingMore()
@@ -177,7 +180,7 @@ class HomeViewController: UIViewController {
 		self.collectionView.backgroundColor = UIColor.primaryColor
 		self.collectionViewLayout.scrollDirection = .vertical
 		self.collectionView.contentInset = UIEdgeInsets(
-			top: verticalPadding + filterView.frame.height,
+			top: verticalPadding,
 			left: 0,
 			bottom: navigationBarHeight + statusBarHeight + verticalPadding,
 			right: 0
@@ -188,23 +191,14 @@ class HomeViewController: UIViewController {
 	}
 	
 	fileprivate func configureNavigation() {
-		self.navigationItem.title = "Movie Kita"
+		self.navigationItem.titleView = setTitle(title: "Movie Kita", subtitle: self.viewModel.selectedFilterType.rawValue())
 		
-		let image = UIImage(named: "ico-favourite")?.withTintColor(UIColor.primaryColor, renderingMode: .alwaysOriginal)
-		let addBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(favouriteButtonAction(_:)))
+		let image = UIImage(named: "ico-change-list")?.withTintColor(UIColor.primaryColor, renderingMode: .alwaysOriginal)
+		let addBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(didChangeButton(_:)))
 		
 		self.navigationItem.rightBarButtonItem = addBarButton
 		self.navigationItem.rightBarButtonItem?.isAccessibilityElement = true
 		self.navigationItem.rightBarButtonItem?.accessibilityIdentifier = "add_favourite"
-	}
-	
-	fileprivate func configureFilterView() {
-		let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-		let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-		let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
-		
-		self.filterView.frame.size =  CGSize(width: UIScreen.main.bounds.width, height: filterView.frame.height + statusBarHeight + navigationBarHeight)
-		view.addSubview(filterView)
 	}
 	
 	fileprivate func configureNotification() {
@@ -215,25 +209,25 @@ class HomeViewController: UIViewController {
 	
 	fileprivate func configureSheetAction() {
 		let alert = UIAlertController(title: nil, message: "Please Select an Option", preferredStyle: .actionSheet)
-		
-		alert.addAction(UIAlertAction(title: MovieFilterType.Popular.rawValue(), style: .default , handler:{ (UIAlertAction)in
+		alert.addAction(UIAlertAction(title: MovieFilterType.Popular.rawValue(), style: .default , handler:{ (UIAlertAction) in
 			self.viewModel.selectedFilterType = .Popular
 			self.viewModel.requestListMovie(movieFilterType: .Popular)
-			NotificationCenter.default.post(name: .filterNameChanged, object: MovieFilterType.Popular.rawValue())
 		}))
 		
-		alert.addAction(UIAlertAction(title: MovieFilterType.TopRated.rawValue(), style: .default , handler:{ (UIAlertAction)in
+		alert.addAction(UIAlertAction(title: MovieFilterType.TopRated.rawValue(), style: .default , handler:{ (UIAlertAction) in
 			self.viewModel.selectedFilterType = .TopRated
 			self.viewModel.requestListMovie(movieFilterType: .TopRated)
-			NotificationCenter.default.post(name: .filterNameChanged, object: MovieFilterType.TopRated.rawValue())
 		}))
 		
-		alert.addAction(UIAlertAction(title: MovieFilterType.NowPlaying.rawValue(), style: .default , handler:{ (UIAlertAction)in
+		alert.addAction(UIAlertAction(title: MovieFilterType.NowPlaying.rawValue(), style: .default , handler:{ (UIAlertAction) in
 			self.viewModel.selectedFilterType = .NowPlaying
 			self.viewModel.requestListMovie(movieFilterType: .NowPlaying)
-			NotificationCenter.default.post(name: .filterNameChanged, object: MovieFilterType.NowPlaying.rawValue())
 		}))
 		
+		alert.addAction(UIAlertAction(title: MovieFilterType.Favourite.rawValue(), style: .default , handler:{ (UIAlertAction) in
+			self.viewModel.selectedFilterType = .Favourite
+			self.viewModel.batchUpdateHandler()
+		}))
 		alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
 		
 		self.present(alert, animated: true, completion: nil)
@@ -251,7 +245,40 @@ class HomeViewController: UIViewController {
 		self.viewModel.requestListMovie(movieFilterType: self.viewModel.selectedFilterType)
 	}
 	
-	@objc func favouriteButtonAction(_ sender: UIBarButtonItem) {
-		print("halohai")
+	@objc func didChangeButton(_ sender: UIBarButtonItem) {
+		self.configureSheetAction()
+	}
+	
+	func setTitle(title:String, subtitle:String) -> UIView {
+		let titleLabel = UILabel(frame: CGRect(x: 0, y: -2, width: 0, height: 0))
+		
+		titleLabel.backgroundColor = UIColor.clear
+		titleLabel.textColor = UIColor.black
+		titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
+		titleLabel.text = title
+		titleLabel.sizeToFit()
+		
+		let subtitleLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 0, height: 0))
+		subtitleLabel.backgroundColor = UIColor.clear
+		subtitleLabel.textColor = UIColor.gray
+		subtitleLabel.font = UIFont.systemFont(ofSize: 12)
+		subtitleLabel.text = subtitle
+		subtitleLabel.sizeToFit()
+		
+		let titleView = UIView(frame: CGRect(x: 0, y: 0, width: max(titleLabel.frame.size.width, subtitleLabel.frame.size.width), height: 30))
+		titleView.addSubview(titleLabel)
+		titleView.addSubview(subtitleLabel)
+		
+		let widthDiff = subtitleLabel.frame.size.width - titleLabel.frame.size.width
+		
+		if widthDiff < 0 {
+			let newX = widthDiff / 2
+			subtitleLabel.frame.origin.x = abs(newX)
+		} else {
+			let newX = widthDiff / 2
+			titleLabel.frame.origin.x = newX
+		}
+		
+		return titleView
 	}
 }

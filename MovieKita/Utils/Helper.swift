@@ -85,5 +85,4 @@ extension UIColor {
 
 extension NSNotification.Name {
 	static let filterTapped = NSNotification.Name("filterTapped")
-	static let filterNameChanged = NSNotification.Name("filterNameChanged")
 }

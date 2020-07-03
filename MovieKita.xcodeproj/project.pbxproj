@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		462FB35324AE0BDA001A165F /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB35224AE0BDA001A165F /* NavigationController.swift */; };
 		462FB35524AE0C0B001A165F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB35424AE0C0B001A165F /* HomeViewController.swift */; };
-		462FB35724AE3DF9001A165F /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 462FB35624AE3DF9001A165F /* FilterView.xib */; };
-		462FB35924AE4116001A165F /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB35824AE4116001A165F /* FilterView.swift */; };
 		462FB36024AEE317001A165F /* ESPullToRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 462FB35F24AEE317001A165F /* ESPullToRefresh.framework */; };
 		462FB36124AEE317001A165F /* ESPullToRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 462FB35F24AEE317001A165F /* ESPullToRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		463BF85C24AF9A7F0083A0F7 /* MovieKitaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BF85B24AF9A7F0083A0F7 /* MovieKitaTests.swift */; };
@@ -106,8 +104,6 @@
 /* Begin PBXFileReference section */
 		462FB35224AE0BDA001A165F /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		462FB35424AE0C0B001A165F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		462FB35624AE3DF9001A165F /* FilterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
-		462FB35824AE4116001A165F /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		462FB35B24AEC5BD001A165F /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		462FB35F24AEE317001A165F /* ESPullToRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ESPullToRefresh.framework; path = Carthage/Build/iOS/ESPullToRefresh.framework; sourceTree = "<group>"; };
 		463BF85924AF9A7F0083A0F7 /* MovieKitaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieKitaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,8 +222,6 @@
 			children = (
 				46EA176024ADC2F60062E334 /* MainMovieCell.xib */,
 				46EA176224ADDC9B0062E334 /* MainMovieCell.swift */,
-				462FB35624AE3DF9001A165F /* FilterView.xib */,
-				462FB35824AE4116001A165F /* FilterView.swift */,
 				4685756724AF400500726589 /* DetailMovieView.xib */,
 				4685756924AF404400726589 /* DetailMovieView.swift */,
 				4685756D24AF62B700726589 /* ReviewMovieCell.xib */,
@@ -409,7 +403,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				462FB35724AE3DF9001A165F /* FilterView.xib in Resources */,
 				46F35F2124ACAD1800DC92C3 /* LaunchScreen.storyboard in Resources */,
 				4685756824AF400600726589 /* DetailMovieView.xib in Resources */,
 				46F35F1E24ACAD1800DC92C3 /* Assets.xcassets in Resources */,
@@ -496,7 +489,6 @@
 				46EA175224AD7D7A0062E334 /* Movie.swift in Sources */,
 				46F35F1524ACAD1300DC92C3 /* AppDelegate.swift in Sources */,
 				46FD211B24ACE70700B10433 /* APIError.swift in Sources */,
-				462FB35924AE4116001A165F /* FilterView.swift in Sources */,
 				46FD210824ACCEBF00B10433 /* APIProvider.swift in Sources */,
 				46EA175624ADBCAF0062E334 /* ViewModel.swift in Sources */,
 				46EA175E24ADBFE10062E334 /* FactoryProtocol.swift in Sources */,

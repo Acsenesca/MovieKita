@@ -15,6 +15,7 @@ enum MovieFilterType: String {
 	case Popular
 	case TopRated
 	case NowPlaying
+	case Favourite
 	case Undefined
 	
 	func description() -> String {
@@ -32,6 +33,7 @@ enum MovieFilterType: String {
 		case .Popular: return "Popular"
 		case .TopRated: return "Top Rated"
 		case .NowPlaying: return "Now Playing"
+		case .Favourite: return "Favourite"
 		default:
 			return "undefined"
 		}
