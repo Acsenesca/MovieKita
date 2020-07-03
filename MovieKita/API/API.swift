@@ -12,7 +12,7 @@ import Moya
 //MARK:- API
 enum API {
 	case Token
-	case ListMovie(movieFilterType: MovieFilterType)
+	case ListMovie(movieFilterType: MovieFilterType, page: Int?)
 	case MovieDetail(movieId: Int)
 	case ListMovieReview(movieId: Int)
 	
@@ -20,8 +20,8 @@ enum API {
 		switch self {
 		case .Token:
 			return APIToken()
-		case .ListMovie(let movieFilterType):
-			return APIListMovie(movieFilterType: movieFilterType)
+		case .ListMovie(let movieFilterType, let page):
+			return APIListMovie(movieFilterType: movieFilterType, page: page)
 		case .MovieDetail(let movieId):
 			return APIMovieDetail(movieId: movieId)
 		case .ListMovieReview(let movieId):
@@ -88,6 +88,7 @@ struct APIToken: APIFactoryable {
 //MARK:- LIST MOVIE
 struct APIListMovie: APIFactoryable {
 	let movieFilterType: MovieFilterType
+	let page: Int?
 	
 	var path: String {
 		return "/movie/\(movieFilterType.description())"
@@ -96,7 +97,15 @@ struct APIListMovie: APIFactoryable {
 		return .get
 	}
 	var task: Task {
-		let parameters = [ "api_key": APIKey ]
+		var dict: [String: Any] = [
+			"api_key": APIKey,
+		]
+		
+		if let page = self.page {
+            dict["page"] = page
+        }
+		
+		let parameters = dict
 		
 		return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
 	}

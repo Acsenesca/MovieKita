@@ -140,8 +140,8 @@ struct ServiceAPI {
 	}
 	
 	//MARK:- LIST MOVIE
-	static func requestListMovie(movieFilterType: MovieFilterType) -> SignalProducer<ListMovie?, APIError> {
-		return request(API.ListMovie(movieFilterType: movieFilterType), provider: APIProvider, jsonObject: { JSONObjectWithData(data: $0) })
+	static func requestListMovie(movieFilterType: MovieFilterType, page: Int? = nil) -> SignalProducer<ListMovie?, APIError> {
+		return request(API.ListMovie(movieFilterType: movieFilterType, page: page), provider: APIProvider, jsonObject: { JSONObjectWithData(data: $0) })
 	}
 	
 	//MARK:- MOVIE DETAIL

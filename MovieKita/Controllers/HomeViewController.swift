@@ -12,24 +12,34 @@ import ReactiveSwift
 
 class HomeViewModel: ViewModel {
 	var listMovie: MutableProperty<ListMovie?> = MutableProperty(nil)
+	var movies: MutableProperty<[Movie]?> = MutableProperty(nil)
+	var lastId: Int?
+	var page: Int = 2
 	var reloadDataHandler: (() -> Void) = {}
 	
 	init() {}
 	
 	func requestListMovie(movieFilterType: MovieFilterType) {
 		ServiceAPI.requestListMovie(movieFilterType: movieFilterType)
-			.on(started: { () -> () in
-				//				PKHUD.sharedHUD.contentView = PKHUDProgressView()
-				//				PKHUD.sharedHUD.show()
-			}, failed: { (error) -> () in
-				//				PKHUD.sharedHUD.contentView = PKHUDTextView(text: error.message())
-				//				PKHUD.sharedHUD.hide(animated:true, completion: nil)
-			},value: { (_) -> () in
-				//				PKHUD.sharedHUD.contentView = PKHUDSuccessView()
-				//				PKHUD.sharedHUD.hide(animated:true, completion: nil)
-			}).startWithResult { [weak self] (result) in
+			.startWithResult { [weak self] (result) in
 				if let listMovie = result.value() {
 					self?.listMovie.value = listMovie
+					self?.movies.value = listMovie?.results
+					self?.lastId = listMovie?.results?.last?.id
+				}
+				
+				self?.reloadDataHandler()
+		}
+	}
+	
+	func requestLoadMoreListMovie(movieFilterType: MovieFilterType) {
+		ServiceAPI.requestListMovie(movieFilterType: movieFilterType, page: page)
+			.startWithResult { [weak self] (result) in
+				if let listMovie = result.value() {
+					self?.listMovie.value = listMovie
+					self?.movies.value?.append(contentsOf: listMovie?.results ?? [])
+					self?.lastId = listMovie?.results?.last?.id
+					self?.page += 1
 				}
 				
 				self?.reloadDataHandler()
@@ -38,7 +48,6 @@ class HomeViewModel: ViewModel {
 }
 
 extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, SelectedCollectionSource {
-	
 	func numberOfCollectionCellAtSection(section: Int) -> Int {
 		return self.listMovie.value?.results?.count ?? 0
 	}
@@ -46,7 +55,7 @@ extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, Select
 		return MainMovieCell.identifier()
 	}
 	func collectionCellModelAtIndexPath(indexPath: IndexPath) -> ViewModel {
-		return MainMovieCellModel(movie: self.listMovie.value?.results?[indexPath.row])
+		return MainMovieCellModel(movie: self.movies.value?[indexPath.row])
 	}
 	func cellClassAtIndexPath(indexPath: IndexPath) -> UICollectionViewCell.Type {
 		return MainMovieCell.self
@@ -59,14 +68,14 @@ extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, Select
 	}
 }
 
-
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UIScrollViewDelegate {
 	typealias VM = HomeViewModel
 	var viewModel: VM
 	
 	lazy var collectionViewLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
 	lazy var collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: self.collectionViewLayout)
 	private var collectionViewBinding: CollectionViewBindingUtil<HomeViewModel>?
+	private let refreshControl = UIRefreshControl()
 	
 	lazy var filterView: FilterView = {
 		let view = FilterView.viewFromXib()
@@ -93,6 +102,7 @@ class HomeViewController: UIViewController {
 		self.configureNavigation()
 		self.configureFilterView()
 		self.configureNotification()
+		self.configureRefreshControl()
 		
 		self.viewModel.requestListMovie(movieFilterType: .Popular)
 	}
@@ -108,6 +118,7 @@ class HomeViewController: UIViewController {
 		
 		viewModel.reloadDataHandler = {[weak self] in
 			self?.collectionView.reloadData()
+			self?.refreshControl.endRefreshing()
 		}
 	}
 	
@@ -173,5 +184,17 @@ class HomeViewController: UIViewController {
 		alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
 		
 		self.present(alert, animated: true, completion: nil)
+	}
+	
+	private func configureRefreshControl() {
+		self.refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+		
+		self.collectionView.addSubview(refreshControl)
+		self.collectionView.alwaysBounceVertical = true
+		self.collectionView.refreshControl = refreshControl
+	}
+	
+	@objc private func didPullToRefresh() {
+		self.viewModel.requestListMovie(movieFilterType: .Popular)
 	}
 }
