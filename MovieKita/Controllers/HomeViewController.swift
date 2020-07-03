@@ -18,6 +18,7 @@ class HomeViewModel: ViewModel {
 	var lastId: Int?
 	var page: Int = 2
 	var reloadDataHandler: (() -> Void) = {}
+	var didSelectHandler: ((Movie) -> Void) = {_ in }
 	
 	init() {}
 	
@@ -47,6 +48,11 @@ class HomeViewModel: ViewModel {
 				self?.reloadDataHandler()
 		}
 	}
+	
+	fileprivate func shouldSelectCell(_ indexPath: IndexPath) {
+		guard let movie = self.movies.value?[indexPath.row] else { return }
+		self.didSelectHandler(movie)
+	}
 }
 
 extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, SelectedCollectionSource {
@@ -66,7 +72,7 @@ extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, Select
 		return cell.viewSize()
 	}
 	func didSelectCellAtIndexPath(collectionView: UICollectionView, indexPath: IndexPath, withCell cell: UICollectionViewCell) {
-		//        self.shouldSelectSelectedUserAtIndex(indexPath: indexPath)
+		shouldSelectCell(indexPath)
 	}
 }
 
@@ -128,6 +134,10 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 			[unowned self] in
 			self.viewModel.requestLoadMoreListMovie(movieFilterType: self.viewModel.selectedFilterType)
 		}
+		
+		viewModel.didSelectHandler = {[weak self] user -> Void in
+
+		}
 	}
 	
 	fileprivate func configureCollectionView() {
@@ -154,6 +164,13 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 	
 	fileprivate func configureNavigation() {
 		self.navigationItem.title = "Movie Kita"
+		
+		let image = UIImage(named: "ico-favourite")?.withTintColor(UIColor.primaryColor, renderingMode: .alwaysOriginal)
+		let addBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(favouriteButtonAction(_:)))
+		
+		self.navigationItem.rightBarButtonItem = addBarButton
+		self.navigationItem.rightBarButtonItem?.isAccessibilityElement = true
+		self.navigationItem.rightBarButtonItem?.accessibilityIdentifier = "add_favourite"
 	}
 	
 	fileprivate func configureFilterView() {
@@ -207,5 +224,9 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
 	
 	@objc private func didPullToRefresh() {
 		self.viewModel.requestListMovie(movieFilterType: self.viewModel.selectedFilterType)
+	}
+	
+	@objc func favouriteButtonAction(_ sender: UIBarButtonItem) {
+		print("halohai")
 	}
 }
