@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1Ql-2a-XvK" customClass="ReviewMovieCell" customModule="MovieKita" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="72"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fX0-RU-qXx">
+                <rect key="frame" x="0.0" y="0.0" width="343" height="72"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ic-G5-jks">
+                        <rect key="frame" x="16" y="16" width="311" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4A-c1-7u5">
+                        <rect key="frame" x="16" y="41" width="311" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="b4A-c1-7u5" firstAttribute="leading" secondItem="fX0-RU-qXx" secondAttribute="leading" constant="16" id="CJe-AS-46q"/>
+                    <constraint firstAttribute="trailing" secondItem="2ic-G5-jks" secondAttribute="trailing" constant="16" id="CmW-La-2BX"/>
+                    <constraint firstAttribute="bottom" secondItem="b4A-c1-7u5" secondAttribute="bottom" constant="16" id="Hat-Ju-r5q"/>
+                    <constraint firstItem="b4A-c1-7u5" firstAttribute="top" secondItem="2ic-G5-jks" secondAttribute="bottom" constant="8" id="PC6-TS-nwk"/>
+                    <constraint firstAttribute="trailing" secondItem="b4A-c1-7u5" secondAttribute="trailing" constant="16" id="YzL-6O-2Jo"/>
+                    <constraint firstItem="2ic-G5-jks" firstAttribute="leading" secondItem="fX0-RU-qXx" secondAttribute="leading" constant="16" id="jsu-RD-Xjr"/>
+                    <constraint firstItem="2ic-G5-jks" firstAttribute="top" secondItem="fX0-RU-qXx" secondAttribute="top" constant="16" id="uTB-ED-VC5"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="337" height="0.0"/>
+            <connections>
+                <outlet property="authorLabel" destination="2ic-G5-jks" id="oyQ-e3-vZC"/>
+                <outlet property="contentLabel" destination="b4A-c1-7u5" id="aHh-sy-1UX"/>
+            </connections>
+            <point key="canvasLocation" x="125.36231884057972" y="40.848214285714285"/>
+        </collectionViewCell>
+    </objects>
+</document>
