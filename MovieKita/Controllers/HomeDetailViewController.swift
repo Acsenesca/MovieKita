@@ -14,10 +14,8 @@ class HomeDetailViewModel: ViewModel {
 	let movie: Movie?
 	var listReview: MutableProperty<ListReview?> = MutableProperty(nil)
 	var reviews: MutableProperty<[Review]?> = MutableProperty(nil)
-	var lastId: String?
 	var page: Int = 2
 	var reloadDataHandler: (([IndexPath]) -> Void) = { _ in }
-	var reloadAllDataHandler: (() -> Void) = {}
 	
 	init(movie: Movie?) {
 		self.movie = movie
@@ -136,18 +134,13 @@ class HomeDetailViewController: UIViewController {
 		collectionViewBinding?.bindFlowDelegateWithCollectionView(collectionView: collectionView)
 		collectionViewBinding?.bindDatasourceWithCollectionView(collectionView: collectionView)
 		
-		viewModel.reloadAllDataHandler = { [weak self] in
-			self?.collectionView.reloadData()
-			self?.refreshControl.endRefreshing()
-			self?.collectionView.es.stopLoadingMore()
-		}
-		
 		viewModel.reloadDataHandler = { [weak self] indexPaths in
 			self?.collectionView.performBatchUpdates({
 				self?.collectionView.insertItems(at: indexPaths)
 			}) { [weak self] _ in
 				self?.refreshControl.endRefreshing()
 				self?.collectionView.es.stopLoadingMore()
+				self?.collectionView.es.noticeNoMoreData()
 			}
 		}
 		

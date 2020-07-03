@@ -17,13 +17,13 @@ class HomeViewModel: ViewModel {
 	var selectedFilterType: MovieFilterType = .Popular
 	var page: Int = 2
 	
-	var reloadAllDataHandler: (() -> Void) = {}
+	var batchUpdateHandler: (() -> Void) = {}
 	var reloadDataHandler: (([IndexPath]) -> Void) = { _ in }
 	var didSelectHandler: ((Movie) -> Void) = {_ in }
 	
 	init() {}
 	
-	func requestListMovie(movieFilterType: MovieFilterType) {
+	func requestListMovie(movieFilterType: MovieFilterType, completionHandler: (() -> Void)? = nil) {
 		ServiceAPI.requestListMovie(movieFilterType: movieFilterType)
 			.startWithResult { [weak self] (result) in
 				if let self = self, let listMovie = result.value() {
@@ -31,16 +31,10 @@ class HomeViewModel: ViewModel {
 					self.listMovie.value = listMovie
 					self.movies.value = listMovie?.results
 					
-					var indexPaths: [IndexPath] = []
-					let endIndex = self.movies.value?.count ?? 0
-					
-					for index in 0 ..< endIndex {
-						let indexPath = IndexPath(item: index, section: 0)
-						indexPaths.append(indexPath)
-					}
-					
-					self.reloadDataHandler(indexPaths)
+					self.batchUpdateHandler()
 				}
+				
+				completionHandler?()
 		}
 	}
 	
@@ -135,7 +129,7 @@ class HomeViewController: UIViewController {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		self.viewModel.reloadAllDataHandler()
+		self.viewModel.batchUpdateHandler()
 	}
 	
 	fileprivate func bindViewModel() {
@@ -143,7 +137,7 @@ class HomeViewController: UIViewController {
 		collectionViewBinding?.bindFlowDelegateWithCollectionView(collectionView: collectionView)
 		collectionViewBinding?.bindDatasourceWithCollectionView(collectionView: collectionView)
 		
-		viewModel.reloadAllDataHandler = { [weak self] in
+		viewModel.batchUpdateHandler = { [weak self] in
 			self?.collectionView.reloadData()
 			self?.refreshControl.endRefreshing()
 			self?.collectionView.es.stopLoadingMore()

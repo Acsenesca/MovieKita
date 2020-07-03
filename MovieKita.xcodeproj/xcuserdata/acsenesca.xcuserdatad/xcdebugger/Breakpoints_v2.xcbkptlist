@@ -234,8 +234,8 @@
             filePath = "MovieKita/Controllers/HomeDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "configureCollectionView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,41 +250,9 @@
             filePath = "MovieKita/Controllers/HomeDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "configureView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "017B6580-B190-46A7-91A6-7E334E154ADF"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieKita/Controllers/HomeViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
-            landmarkName = "favouriteButtonAction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "09FE25EF-B5B0-43D6-9BD0-2C2887734DDA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieKita/Controllers/HomeViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "bindViewModel()"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "configureCollectionView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -330,8 +298,8 @@
             filePath = "MovieKita/Controllers/HomeDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "configureCollectionView()"
             landmarkType = "7">
             <Locations>
@@ -380,7 +348,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
             endingLineNumber = "78"
-            landmarkName = "numberOfCollectionCellAtSection(section:)"
+            landmarkName = "collectionCellIdentifierAtIndexPath(indexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
