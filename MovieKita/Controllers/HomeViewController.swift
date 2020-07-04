@@ -14,7 +14,6 @@ import ESPullToRefresh
 class HomeViewModel: ViewModel {
 	var listMovie: MutableProperty<ListMovie?> = MutableProperty(nil)
 	var movies: MutableProperty<[Movie]?> = MutableProperty(nil)
-	var favMovies: MutableProperty<[Movie]?> = MutableProperty(nil)
 	var selectedFilterType: MovieFilterType = .Popular
 	var page: Int = 2
 	
@@ -157,6 +156,12 @@ class HomeViewController: UIViewController {
 		
 		viewModel.reloadDataHandler = { [weak self] in
 			self?.navigationItem.titleView = self?.setTitle(title: "Movie Kita", subtitle: self?.viewModel.selectedFilterType.rawValue() ?? "")
+			if self?.viewModel.selectedFilterType == .Favourite {
+				self?.collectionView.refreshControl = nil
+			} else {
+				self?.collectionView.refreshControl = self?.refreshControl
+			}
+			
 			self?.collectionView.reloadData()
 			self?.refreshControl.endRefreshing()
 			self?.collectionView.es.stopLoadingMore()
@@ -172,7 +177,10 @@ class HomeViewController: UIViewController {
 		}
 		
 		viewModel.emptyStateHandler = { [weak self] in
-			if (self?.viewModel.favMovies.value?.count == 0) || (self?.viewModel.favMovies.value == nil) {
+			let storage = MovieStorage()
+			let fav = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			
+			if (fav?.count == 0) || (fav == nil) {
 				self?.collectionView.setEmptyMessage("No data to display")
 			} else {
 				self?.collectionView.restore()
