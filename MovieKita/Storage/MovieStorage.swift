@@ -23,6 +23,8 @@ class MovieStorage {
 	var keychain: KeychainSwift
 	var keys: [String] = []
 	
+	static let shared = MovieStorage()
+	
 	init() {
 		keychain = KeychainSwift()
 	}
@@ -65,7 +67,7 @@ extension MovieStorage: CacheStorage {
 	
 	func removeAllValues() {
 		MovieKey.allCases.forEach { (key: MovieKey) in
-			
+			removeValue(key: key.rawValue)
 		}
 	}
 }
