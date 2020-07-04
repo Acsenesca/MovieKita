@@ -28,16 +28,9 @@ class HomeViewModelSpec: QuickSpec {
 		
 		describe("Getting") {
 			context("List Movie") {
-//				it("should works properly") {
-//					homeViewModel.reloadDataHandler = {_ in
-//						expect(homeViewModel.movies.value?.count) >= 0
-//					}
-//					homeViewModel.requestListMovie(movieFilterType: .Popular)
-//				}
-//
-				it("should works properly 2") {
+				it("should movies not nil") {
 					homeViewModel.requestListMovie(movieFilterType: .Popular) {
-						expect(homeViewModel.movies.value?.count) > 0
+						expect(homeViewModel.movies.value?.count) >= 0
 					}
 				}
 			}

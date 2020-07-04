@@ -24,7 +24,7 @@ class HomeViewModel: ViewModel {
 	
 	init() {}
 	
-	func requestListMovie(movieFilterType: MovieFilterType) {
+	func requestListMovie(movieFilterType: MovieFilterType, completionHandler: (() -> Void)? = nil) {
 		ServiceAPI.requestListMovie(movieFilterType: movieFilterType)
 			.startWithResult { [weak self] (result) in
 				if let self = self, let listMovie = result.value() {
@@ -33,6 +33,7 @@ class HomeViewModel: ViewModel {
 					self.movies.value = listMovie?.results
 					
 					self.reloadDataHandler()
+					completionHandler?()
 				}				
 		}
 	}
