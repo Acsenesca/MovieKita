@@ -67,12 +67,24 @@ class DetailMovieView: UIView, ViewBinding {
 			self.titleMovieLabel.text = movie.title
 			self.releaseDateLabel.text = Helper.changeDateFormat(dateString: movie.releaseDate ?? "", fromFormat: "yyyy-MM-dd", toFormat: "MMM dd, YYYY")
 			self.overviewLabel.text = movie.overview
-			self.icoLove.image = UIImage(named: "ico-love-unselected")
 			
 			if let posterPath = movie.posterPath, let posterURL = URL(string: imageBaseUrl + posterPath) {
 				let processor = RoundCornerImageProcessor(cornerRadius: 20)
 				self.movieImageView.kf.indicatorType = .activity
 				self.movieImageView.kf.setImage(with: posterURL, options: [.processor(processor)])
+			}
+			
+			let storage = MovieStorage()
+			let movies = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			
+			if let films = movies {
+				if let _ = films.first(where: { film in film.id == movie.id }) {
+					self.viewModel?.selectedLove = true
+					self.icoLove.image = UIImage(named: "ico-love-selected")
+				} else {
+					self.viewModel?.selectedLove = false
+					self.icoLove.image = UIImage(named: "ico-love-unselected")
+				}
 			}
 		}
 	}
@@ -90,7 +102,9 @@ class DetailMovieView: UIView, ViewBinding {
 			self.viewModel?.selectedLove = !vm.selectedLove
 			let storage = MovieStorage()
 			
-			if vm.selectedLove {
+			if let selectedLove = self.viewModel?.selectedLove {
+				self.icoLove.image = selectedLove ? UIImage(named: "ico-love-selected") : UIImage(named: "ico-love-unselected")
+				
 				var movies = storage.value(key: MovieStorageKey.favoriteList.rawValue)
 				
 				if let films = movies {
@@ -103,9 +117,6 @@ class DetailMovieView: UIView, ViewBinding {
 				}
 				
 				storage.cache(value: movies ?? [], key: MovieStorageKey.favoriteList.rawValue)
-				self.icoLove.image = UIImage(named: "ico-love-selected")
-			} else {
-				self.icoLove.image = UIImage(named: "ico-love-unselected")
 			}
 		}
 	}
