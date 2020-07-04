@@ -41,14 +41,33 @@ enum MovieFilterType: String {
 
 }
 
-struct ListMovie {
+struct ListMovie: Encodable {
 	let page: Int?
 	let totalResults: Int?
 	let totalPages: Int?
 	let results: [Movie]?
+	
+	enum PropertyKey: String, CodingKey {
+		case page
+		case totalResults
+		case totalPages
+		case results
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		
+		var container = encoder.container(keyedBy: PropertyKey.self)
+		
+		try container.encodeIfPresent(page, forKey: .page)
+		try container.encodeIfPresent(totalResults, forKey: .totalResults)
+		try container.encodeIfPresent(totalPages, forKey: .totalPages)
+		try container.encodeIfPresent(results, forKey: .results)
+	}
 }
 
-extension ListMovie: Argo.Decodable {
+extension ListMovie: Swift.Decodable {}
+
+extension ListMovie: ArgoToSwiftDecodable {
 	public static func decode(_ json: JSON) -> Decoded<ListMovie> {
 		return curry(self.init)
 			<^> (json <|? "page") as Decoded<Int?>
@@ -58,7 +77,8 @@ extension ListMovie: Argo.Decodable {
 	}
 }
 
-struct Movie {
+struct Movie: Encodable {
+	
 	let id: Int
 	let title: String?
 	let voteAverage: Float?
@@ -73,25 +93,71 @@ struct Movie {
 	let originalLanguage: String?
 	let originalTitle: String?
 	let releaseDate: String?
-	let genres: [Movie.Genre]?
+	let genres: [Genre]?
 	let revenue: Float?
 	let runtime: Int?
 	let status: String?
 	let tagline: String?
 	let budget: Int?
 	
-	struct Genre {
-		let id: Int
-		let name: String?
+	enum PropertyKey: String, CodingKey {
+		case id
+		case title
+		case voteAverage
+		case popularity
+		case voteCount
+		case genreIds
+		case video
+		case adult
+		case overview
+		case posterPath
+		case backdropPath
+		case originalLanguage
+		case originalTitle
+		case releaseDate
+		case genres
+		case revenue
+		case runtime
+		case status
+		case tagline
+		case budget
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		
+		var container = encoder.container(keyedBy: PropertyKey.self)
+		
+		try container.encode(id, forKey: .id)
+		try container.encodeIfPresent(title, forKey: .title)
+		try container.encodeIfPresent(voteAverage, forKey: .voteAverage)
+		try container.encodeIfPresent(popularity, forKey: .popularity)
+		try container.encodeIfPresent(voteCount, forKey: .voteCount)
+		try container.encodeIfPresent(genreIds, forKey: .genreIds)
+		try container.encodeIfPresent(video, forKey: .video)
+		try container.encodeIfPresent(adult, forKey: .adult)
+		try container.encodeIfPresent(overview, forKey: .overview)
+		try container.encodeIfPresent(posterPath, forKey: .posterPath)
+		try container.encodeIfPresent(backdropPath, forKey: .backdropPath)
+		try container.encodeIfPresent(originalLanguage, forKey: .originalLanguage)
+		try container.encodeIfPresent(originalTitle, forKey: .originalTitle)
+		try container.encodeIfPresent(releaseDate, forKey: .releaseDate)
+		try container.encodeIfPresent(genres, forKey: .genres)
+		try container.encodeIfPresent(revenue, forKey: .revenue)
+		try container.encodeIfPresent(runtime, forKey: .runtime)
+		try container.encodeIfPresent(status, forKey: .status)
+		try container.encodeIfPresent(tagline, forKey: .tagline)
+		try container.encodeIfPresent(budget, forKey: .budget)
 	}
 }
 
-extension Movie: Argo.Decodable {
+extension Movie: Swift.Decodable {}
+
+extension Movie: ArgoToSwiftDecodable {
 	public static func decode(_ json: JSON) -> Decoded<Movie> {
 		let m = curry(Movie.init)
 			<^> (json <| "id") as Decoded<Int>
 			<*> (json <|? "title") as Decoded<String?>
-			<*> (json <|? "vote_Average") as Decoded<Float?>
+			<*> (json <|? "vote_average") as Decoded<Float?>
 			<*> (json <|? "popularity") as Decoded<Float?>
 			<*> (json <|? "vote_count") as Decoded<Int?>
 			<*> (json <||? "genre_ids") as Decoded<[Int]?>
@@ -104,7 +170,7 @@ extension Movie: Argo.Decodable {
 			<*> (json <|? "original_title") as Decoded<String?>
 			<*> (json <|? "release_date") as Decoded<String?>
 		
-		let m2 = m <*> (json <||? "genres") as Decoded<[Movie.Genre]?>
+		let m2 = m <*> (json <||? "genres") as Decoded<[Genre]?>
 			<*> (json <|? "revenue") as Decoded<Float?>
 			<*> (json <|? "runtime") as Decoded<Int?>
 			<*> (json <|? "status") as Decoded<String?>
@@ -115,9 +181,29 @@ extension Movie: Argo.Decodable {
 	}
 }
 
-extension Movie.Genre: Argo.Decodable {
-	public static func decode(_ json: JSON) -> Decoded<Movie.Genre> {
-		return curry(Movie.Genre.init)
+struct Genre: Encodable {
+	let id: Int
+	let name: String?
+	
+	enum PropertyKey: String, CodingKey {
+		case id
+		case name
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		
+		var container = encoder.container(keyedBy: PropertyKey.self)
+		
+		try container.encode(id, forKey: .id)
+		try container.encodeIfPresent(name, forKey: .name)
+	}
+}
+
+extension Genre: Swift.Decodable {}
+
+extension Genre: ArgoToSwiftDecodable {
+	public static func decode(_ json: JSON) -> Decoded<Genre> {
+		return curry(Genre.init)
 			<^> (json <| "id") as Decoded<Int>
 			<*> (json <|? "name") as Decoded<String?>
 	}

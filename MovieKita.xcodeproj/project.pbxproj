@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46073F3F24B080F700AF187D /* MovieStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46073F3E24B080F700AF187D /* MovieStorage.swift */; };
+		46073F4124B0815200AF187D /* ArgoToSwiftDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46073F4024B0815200AF187D /* ArgoToSwiftDecodable.swift */; };
 		462FB35324AE0BDA001A165F /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB35224AE0BDA001A165F /* NavigationController.swift */; };
 		462FB35524AE0C0B001A165F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB35424AE0C0B001A165F /* HomeViewController.swift */; };
 		462FB36024AEE317001A165F /* ESPullToRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 462FB35F24AEE317001A165F /* ESPullToRefresh.framework */; };
@@ -103,6 +105,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		46073F3E24B080F700AF187D /* MovieStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStorage.swift; sourceTree = "<group>"; };
+		46073F4024B0815200AF187D /* ArgoToSwiftDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoToSwiftDecodable.swift; sourceTree = "<group>"; };
 		462FB35224AE0BDA001A165F /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		462FB35424AE0C0B001A165F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		462FB35B24AEC5BD001A165F /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				463BF87024B045270083A0F7 /* CacheStorage.swift */,
+				46073F3E24B080F700AF187D /* MovieStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 				46EA175924ADBE070062E334 /* CollectionViewBindingUtil.swift */,
 				46EA175B24ADBE630062E334 /* SectionedSourceProtocol.swift */,
 				46EA175D24ADBFE10062E334 /* FactoryProtocol.swift */,
+				46073F4024B0815200AF187D /* ArgoToSwiftDecodable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -497,6 +503,7 @@
 				46FD211324ACD3C000B10433 /* Token.swift in Sources */,
 				46EA176324ADDC9B0062E334 /* MainMovieCell.swift in Sources */,
 				4685756A24AF404400726589 /* DetailMovieView.swift in Sources */,
+				46073F3F24B080F700AF187D /* MovieStorage.swift in Sources */,
 				46EA175824ADBD470062E334 /* Helper.swift in Sources */,
 				46F35F1924ACAD1300DC92C3 /* ViewController.swift in Sources */,
 				46EA175224AD7D7A0062E334 /* Movie.swift in Sources */,
@@ -518,6 +525,7 @@
 				46FD211D24ACE97500B10433 /* APIHelper.swift in Sources */,
 				46EA175A24ADBE070062E334 /* CollectionViewBindingUtil.swift in Sources */,
 				46FD210C24ACCFCF00B10433 /* APIFactory.swift in Sources */,
+				46073F4124B0815200AF187D /* ArgoToSwiftDecodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
