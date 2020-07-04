@@ -3,7 +3,7 @@
   "iOS" : [
     {
       "name" : "Curry",
-      "hash" : "61937297411fc021794a588938a6a31109b31c770c3f423477e03dc75376a9f3",
+      "hash" : "1b315ae71786c76f9d54b80f20f535e72cf505e3d4c13c6c018ba4f25509f30b",
       "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]

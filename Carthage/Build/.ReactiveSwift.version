@@ -3,7 +3,7 @@
   "iOS" : [
     {
       "name" : "ReactiveSwift",
-      "hash" : "d4f2c1a38872eb8a47d281b6522368d4d630bc0e6976ecbb9a6c505855eff2ff",
+      "hash" : "168c2e3c19134b0a45388f2929b3df9e1b135704b2fcaa332e327b6db3923b4a",
       "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]

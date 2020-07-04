@@ -12,11 +12,10 @@ import Kingfisher
 
 class DetailMovieViewModel: ViewModel {
 	let movie: Movie?
-	let selectedLove: Bool = false
+	var selectedLove: Bool = false
 	
 	init(movie: Movie?) {
 		self.movie = movie
-		
 	}
 }
 
@@ -87,7 +86,14 @@ class DetailMovieView: UIView, ViewBinding {
 	}
 	
 	@objc func tapLoveDetected() {
-		print("Single Tap on imageview")
+		if let selectedLove = self.viewModel?.selectedLove {
+			self.viewModel?.selectedLove = !selectedLove
+			
+			if selectedLove {
+				self.icoLove.image = UIImage(named: "ico-love-selected")
+			} else {
+				 self.icoLove.image = UIImage(named: "ico-love-unselected")
+			}
+		}
 	}
-
 }
