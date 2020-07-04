@@ -15,7 +15,8 @@ class HomeDetailViewModel: ViewModel {
 	var listReview: MutableProperty<ListReview?> = MutableProperty(nil)
 	var reviews: MutableProperty<[Review]?> = MutableProperty(nil)
 	var page: Int = 2
-	var reloadDataHandler: (([IndexPath]) -> Void) = { _ in }
+	var reloadDataHandler: (() -> Void) = {}
+	var batchUpdateHandler: (([IndexPath]) -> Void) = { _ in }
 	
 	init(movie: Movie?) {
 		self.movie = movie
@@ -30,15 +31,7 @@ class HomeDetailViewModel: ViewModel {
 						self.listReview.value = listReview
 						self.reviews.value = listReview?.results
 						
-						var indexPaths: [IndexPath] = []
-						let endIndex = self.reviews.value?.count ?? 0
-						
-						for index in 0 ..< endIndex {
-							let indexPath = IndexPath(item: index, section: 0)
-							indexPaths.append(indexPath)
-						}
-						
-						self.reloadDataHandler(indexPaths)
+						self.reloadDataHandler()
 					}
 			}
 		}
@@ -64,7 +57,7 @@ class HomeDetailViewModel: ViewModel {
 							indexPaths.append(indexPath)
 						}
 						
-						self.reloadDataHandler(indexPaths)
+						self.batchUpdateHandler(indexPaths)
 					}
 			}
 		}
@@ -106,6 +99,13 @@ class HomeDetailViewController: UIViewController {
 		return view
 	}()
 	
+	lazy var separatorView: UIView = {
+		let view = UIView()
+		view.backgroundColor = .white
+		
+		return view
+	}()
+	
 	init(viewModel: HomeDetailViewModel) {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
@@ -117,16 +117,14 @@ class HomeDetailViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = .white
+		view.backgroundColor = .primaryColor
 		
 		self.bindViewModel()
+		
 		self.configureCollectionView()
+		self.configureSeparatorView()
 		self.configureView()
 		self.configureRefreshControl()
-	}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		
 	}
 	
 	fileprivate func bindViewModel() {
@@ -134,7 +132,13 @@ class HomeDetailViewController: UIViewController {
 		collectionViewBinding?.bindFlowDelegateWithCollectionView(collectionView: collectionView)
 		collectionViewBinding?.bindDatasourceWithCollectionView(collectionView: collectionView)
 		
-		viewModel.reloadDataHandler = { [weak self] indexPaths in
+		viewModel.reloadDataHandler = { [weak self] in
+			self?.collectionView.reloadData()
+			self?.refreshControl.endRefreshing()
+			self?.collectionView.es.stopLoadingMore()
+		}
+		
+		viewModel.batchUpdateHandler = { [weak self] indexPaths in
 			self?.collectionView.performBatchUpdates({
 				self?.collectionView.insertItems(at: indexPaths)
 			}) { [weak self] _ in
@@ -153,37 +157,139 @@ class HomeDetailViewController: UIViewController {
 	}
 	
 	fileprivate func configureView() {
-		self.title = self.viewModel.movie?.originalTitle
-		let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-		let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-		let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
-		self.detailMovieView.backgroundColor = .blue
+		title = viewModel.movie?.originalTitle
 		
-		self.detailMovieView.frame.size =  CGSize(width: UIScreen.main.bounds.width, height: detailMovieView.frame.height + statusBarHeight + navigationBarHeight)
+		edgesForExtendedLayout = []
 		
 		view.addSubview(self.detailMovieView)
+		
+		setDetailMovieViewConstraints()
+	}
+	
+	fileprivate func setDetailMovieViewConstraints() {
+		detailMovieView.translatesAutoresizingMaskIntoConstraints = false
+		
+		NSLayoutConstraint(item: detailMovieView,
+						   attribute: NSLayoutConstraint.Attribute.top,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: view,
+						   attribute: NSLayoutConstraint.Attribute.top,
+						   multiplier: 1,
+						   constant: 16).isActive = true
+		
+		NSLayoutConstraint(item: detailMovieView,
+						   attribute: NSLayoutConstraint.Attribute.left,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: view,
+						   attribute: NSLayoutConstraint.Attribute.left,
+						   multiplier: 1,
+						   constant: 16).isActive = true
+		
+		NSLayoutConstraint(item: detailMovieView,
+						   attribute: NSLayoutConstraint.Attribute.right,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: view,
+						   attribute: NSLayoutConstraint.Attribute.right,
+						   multiplier: 1,
+						   constant: -16).isActive = true
+		
+		NSLayoutConstraint(item: detailMovieView,
+						   attribute: NSLayoutConstraint.Attribute.bottom,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: separatorView,
+						   attribute: NSLayoutConstraint.Attribute.top,
+						   multiplier: 1,
+						   constant: -16).isActive = true
+		
+		NSLayoutConstraint(item: detailMovieView,
+						   attribute: NSLayoutConstraint.Attribute.height,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: nil,
+						   attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+						   multiplier: 1,
+						   constant: detailMovieView.viewSize().height).isActive = true
+	}
+	
+	fileprivate func configureSeparatorView() {
+		view.addSubview(self.separatorView)
+		
+		setSeparatorViewConstraints()
+	}
+	
+	fileprivate func setSeparatorViewConstraints() {
+		separatorView.translatesAutoresizingMaskIntoConstraints = false
+		
+		NSLayoutConstraint(item: separatorView,
+						   attribute: NSLayoutConstraint.Attribute.bottom,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: collectionView,
+						   attribute: NSLayoutConstraint.Attribute.top,
+						   multiplier: 1,
+						   constant: -16).isActive = true
+		
+		NSLayoutConstraint(item: separatorView,
+						   attribute: NSLayoutConstraint.Attribute.left,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: view,
+						   attribute: NSLayoutConstraint.Attribute.left,
+						   multiplier: 1,
+						   constant: 16).isActive = true
+		
+		NSLayoutConstraint(item: separatorView,
+						   attribute: NSLayoutConstraint.Attribute.right,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: view,
+						   attribute: NSLayoutConstraint.Attribute.right,
+						   multiplier: 1,
+						   constant: -16).isActive = true
+		
+		NSLayoutConstraint(item: separatorView,
+						   attribute: NSLayoutConstraint.Attribute.height,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: nil,
+						   attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+						   multiplier: 1,
+						   constant: 1).isActive = true
 	}
 	
 	fileprivate func configureCollectionView() {
 		view.addSubview(self.collectionView)
 		
-		let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-		let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-		let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
-		let verticalPadding: CGFloat = 16
+		setCollectionViewConstraints()
 		
-		self.collectionView.backgroundView?.backgroundColor = UIColor.white
-		self.collectionView.backgroundColor = UIColor.primaryColor
+		self.collectionView.backgroundColor = UIColor.clear
+		self.collectionView.showsVerticalScrollIndicator = false
 		self.collectionViewLayout.scrollDirection = .vertical
-		self.collectionView.contentInset = UIEdgeInsets(
-			top: verticalPadding + detailMovieView.frame.height,
-			left: 0,
-			bottom: navigationBarHeight + statusBarHeight + verticalPadding,
-			right: 0
-		)
 		
-		self.collectionView.scrollIndicatorInsets = self.collectionView.contentInset
 		self.collectionView.register(ReviewMovieCell.nib(), forCellWithReuseIdentifier: ReviewMovieCell.identifier())
+	}
+	
+	fileprivate func setCollectionViewConstraints() {
+		collectionView.translatesAutoresizingMaskIntoConstraints = false
+		
+		NSLayoutConstraint(item: collectionView,
+						   attribute: NSLayoutConstraint.Attribute.left,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: view,
+						   attribute: NSLayoutConstraint.Attribute.left,
+						   multiplier: 1,
+						   constant: 16).isActive = true
+		
+		NSLayoutConstraint(item: collectionView,
+						   attribute: NSLayoutConstraint.Attribute.right,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: view,
+						   attribute: NSLayoutConstraint.Attribute.right,
+						   multiplier: 1,
+						   constant: -16).isActive = true
+		
+		NSLayoutConstraint(item: collectionView,
+						   attribute: NSLayoutConstraint.Attribute.bottom,
+						   relatedBy: NSLayoutConstraint.Relation.equal,
+						   toItem: view,
+						   attribute: NSLayoutConstraint.Attribute.bottom,
+						   multiplier: 1,
+						   constant: -16).isActive = true
 	}
 	
 	private func configureRefreshControl() {
