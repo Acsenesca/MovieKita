@@ -67,7 +67,7 @@ class DetailMovieView: UIView, ViewBinding {
 			self.titleMovieLabel.text = movie.title
 			self.releaseDateLabel.text = Helper.changeDateFormat(dateString: movie.releaseDate ?? "", fromFormat: "yyyy-MM-dd", toFormat: "MMM dd, YYYY")
 			self.overviewLabel.text = movie.overview
-			self.icoLove.image = UIImage(named: "ico-love-selected")
+			self.icoLove.image = UIImage(named: "ico-love-unselected")
 			
 			if let posterPath = movie.posterPath, let posterURL = URL(string: imageBaseUrl + posterPath) {
 				let processor = RoundCornerImageProcessor(cornerRadius: 20)
@@ -80,19 +80,32 @@ class DetailMovieView: UIView, ViewBinding {
 	func configureGesture() {
 		let singleTap = UITapGestureRecognizer(target: self, action:  #selector(tapLoveDetected))
 		singleTap.numberOfTapsRequired = 1
-
+		
 		self.icoLove.isUserInteractionEnabled = true
 		self.icoLove.addGestureRecognizer(singleTap)
 	}
 	
 	@objc func tapLoveDetected() {
-		if let selectedLove = self.viewModel?.selectedLove {
-			self.viewModel?.selectedLove = !selectedLove
+		if let vm = self.viewModel, let movie = vm.movie {
+			self.viewModel?.selectedLove = !vm.selectedLove
+			let storage = MovieStorage()
 			
-			if selectedLove {
+			if vm.selectedLove {
+				var movies = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+				
+				if let films = movies {
+					
+					if let index = films.firstIndex(where: { film in film.id == movie.id }) {
+						movies?.remove(at: index)
+					} else {
+						movies?.append(movie)
+					}
+				}
+				
+				storage.cache(value: movies ?? [], key: MovieStorageKey.favoriteList.rawValue)
 				self.icoLove.image = UIImage(named: "ico-love-selected")
 			} else {
-				 self.icoLove.image = UIImage(named: "ico-love-unselected")
+				self.icoLove.image = UIImage(named: "ico-love-unselected")
 			}
 		}
 	}

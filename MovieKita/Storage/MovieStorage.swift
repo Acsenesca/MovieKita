@@ -38,13 +38,25 @@ extension MovieStorage: CacheStorage {
 	}
 	
 	func value(key: MovieStorage.Key) -> [Movie]? {
-		guard let data = keychain.getData(key, asReference: true) else {
-			return nil
+		keychain.synchronizable = true
+		let jsonString = keychain.get(key)
+		var films: [Movie]? = []
+		
+		if let jsonStringNew = jsonString {
+			let jsonData = Data(jsonStringNew.utf8)
+			
+			let decoder = JSONDecoder()
+			do {
+				decoder.keyDecodingStrategy = .convertFromSnakeCase
+				let movies = try decoder.decode([Movie].self, from: jsonData)
+				
+				films = movies
+			} catch {
+				print(error.localizedDescription)
+			}
 		}
-		
-		let movies = try? JSONDecoder().decode([Movie].self, from: data)
-		
-		return movies
+
+		return films
 	}
 	
 	func removeValue(key: String) {

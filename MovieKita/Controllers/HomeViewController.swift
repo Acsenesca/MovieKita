@@ -62,15 +62,26 @@ class HomeViewModel: ViewModel {
 	}
 	
 	fileprivate func shouldSelectCell(_ indexPath: IndexPath) {
-		guard let movie = self.movies.value?[indexPath.row] else { return }
-		self.didSelectHandler(movie)
+		if self.selectedFilterType == .Favourite {
+			let storage = MovieStorage()
+			let fav = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			
+			guard let movie = fav?[indexPath.row] else { return }
+			self.didSelectHandler(movie)
+		} else {
+			guard let movie = self.movies.value?[indexPath.row] else { return }
+			self.didSelectHandler(movie)
+		}
 	}
 }
 
 extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, SelectedCollectionSource {
 	func numberOfCollectionCellAtSection(section: Int) -> Int {
-		if selectedFilterType == .Favourite {
-			return self.favMovies.value?.count ?? 0
+		if self.selectedFilterType == .Favourite {
+			let storage = MovieStorage()
+			let fav = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			
+			return fav?.count ?? 0
 		} else {
 			return self.movies.value?.count ?? 0
 		}
@@ -79,8 +90,11 @@ extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, Select
 		return MainMovieCell.identifier()
 	}
 	func collectionCellModelAtIndexPath(indexPath: IndexPath) -> ViewModel {
-		if selectedFilterType == .Favourite {
-			return MainMovieCellModel(movie: self.favMovies.value?[indexPath.row])
+		if self.selectedFilterType == .Favourite {
+			let storage = MovieStorage()
+			let fav = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			
+			return MainMovieCellModel(movie: fav?[indexPath.row])
 		} else {
 			return MainMovieCellModel(movie: self.movies.value?[indexPath.row])
 		}
