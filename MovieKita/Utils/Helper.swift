@@ -14,6 +14,17 @@ struct Screen {
 	static let height: Float = Float(UIScreen.main.bounds.size.height)
 }
 
+class Helper {
+	static func changeDateFormat(dateString: String, fromFormat: String, toFormat: String) -> String {
+		let inputDateFormatter = DateFormatter()
+		inputDateFormatter.dateFormat = fromFormat
+		let date = inputDateFormatter.date(from: dateString)
+
+		let outputDateFormatter = DateFormatter()
+		outputDateFormatter.dateFormat = toFormat
+		return outputDateFormatter.string(from: date ?? Date())
+	}}
+
 extension UIView {
 	fileprivate class func typeSafeFromXib<T: UIView>() -> T {
 		if let view: AnyObject = Bundle.main.loadNibNamed(self.nibName(), owner: nil, options: nil)?.first as AnyObject? {

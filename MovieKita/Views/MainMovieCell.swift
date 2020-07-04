@@ -52,7 +52,7 @@ class MainMovieCell: UICollectionViewCell, ViewBinding {
 		
 		if let movie = self.viewModel?.movie {
 			self.titleMovieLabel.text = movie.title
-			self.releaseDateLabel.text = movie.releaseDate
+			self.releaseDateLabel.text = Helper.changeDateFormat(dateString: movie.releaseDate ?? "", fromFormat: "yyyy-MM-dd", toFormat: "MMM dd, YYYY")
 			self.overviewLabel.text = movie.overview
 			
 			if let posterPath = movie.posterPath, let posterURL = URL(string: imageBaseUrl + posterPath) {

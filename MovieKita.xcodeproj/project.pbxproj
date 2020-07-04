@@ -24,6 +24,7 @@
 		4685756C24AF512300726589 /* HomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4685756B24AF512300726589 /* HomeDetailViewController.swift */; };
 		4685756E24AF62B700726589 /* ReviewMovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4685756D24AF62B700726589 /* ReviewMovieCell.xib */; };
 		4685757024AF634100726589 /* ReviewMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4685756F24AF634100726589 /* ReviewMovieCell.swift */; };
+		46996C2624B0609400188223 /* ArgoCodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46996C2524B0609400188223 /* ArgoCodableExtensions.swift */; };
 		46EA175224AD7D7A0062E334 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA175124AD7D7A0062E334 /* Movie.swift */; };
 		46EA175624ADBCAF0062E334 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA175524ADBCAF0062E334 /* ViewModel.swift */; };
 		46EA175824ADBD470062E334 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EA175724ADBD470062E334 /* Helper.swift */; };
@@ -119,6 +120,7 @@
 		4685756D24AF62B700726589 /* ReviewMovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewMovieCell.xib; sourceTree = "<group>"; };
 		4685756F24AF634100726589 /* ReviewMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewMovieCell.swift; sourceTree = "<group>"; };
 		468AD9B924AEEAC2004B2953 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		46996C2524B0609400188223 /* ArgoCodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoCodableExtensions.swift; sourceTree = "<group>"; };
 		46EA175124AD7D7A0062E334 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		46EA175524ADBCAF0062E334 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		46EA175724ADBD470062E334 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				46EA175924ADBE070062E334 /* CollectionViewBindingUtil.swift */,
 				46EA175B24ADBE630062E334 /* SectionedSourceProtocol.swift */,
 				46EA175D24ADBFE10062E334 /* FactoryProtocol.swift */,
+				46996C2524B0609400188223 /* ArgoCodableExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				46EA176324ADDC9B0062E334 /* MainMovieCell.swift in Sources */,
 				4685756A24AF404400726589 /* DetailMovieView.swift in Sources */,
 				46EA175824ADBD470062E334 /* Helper.swift in Sources */,
+				46996C2624B0609400188223 /* ArgoCodableExtensions.swift in Sources */,
 				46F35F1924ACAD1300DC92C3 /* ViewController.swift in Sources */,
 				46EA175224AD7D7A0062E334 /* Movie.swift in Sources */,
 				46F35F1524ACAD1300DC92C3 /* AppDelegate.swift in Sources */,
