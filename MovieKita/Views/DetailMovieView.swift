@@ -37,16 +37,29 @@ class DetailMovieView: UIView, ViewBinding {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		
 	}
 	
-//	override func viewSize() -> CGSize {
-//		return CGSize(width: UIScreen.main.bounds.width - 32, height: 148)
-//	}
-//	
+	override func viewSize() -> CGSize {
+		let title = viewModel?.movie?.title ?? ""
+		let overview = viewModel?.movie?.overview ?? ""
+		
+		let inset: CGFloat = 32
+		let width = UIScreen.main.bounds.width - inset
+		
+		let titleWidth = width - inset - 88 - 8 - 40
+		let titleHeight = title.height(withConstrainedWidth: titleWidth, font: UIFont.systemFont(ofSize: 18, weight: .semibold))
+		
+		let overviewWidth = width - inset - 88 - 8
+		let overviewHeight = overview.height(withConstrainedWidth: overviewWidth, font: UIFont.systemFont(ofSize: 12, weight: .light))
+		
+		let totalHeight = titleHeight + overviewHeight + inset + 16 + 16
+		let height = totalHeight >= 160 ? totalHeight : 160
+		
+		return CGSize(width: width, height: height)
+	}
+	
 	func bindViewModel(viewModel: VM?) {
 		self.viewModel = viewModel
-		
 		
 		configureView()
 	}
