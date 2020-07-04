@@ -22,7 +22,7 @@ class HomeDetailViewModel: ViewModel {
 		self.movie = movie
 	}
 	
-	func requestListMovieReview() {
+	func requestListMovieReview(completionHandler: (() -> Void)? = nil) {
 		if let movie = self.movie {
 			ServiceAPI.requestListMovieReview(movieId: movie.id)
 				.startWithResult { [weak self] (result) in
@@ -32,6 +32,7 @@ class HomeDetailViewModel: ViewModel {
 						self.reviews.value = listReview?.results
 						
 						self.reloadDataHandler()
+						completionHandler?()
 					}
 			}
 		}

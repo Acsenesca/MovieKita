@@ -14,11 +14,6 @@ class MainMovieCellModel: ViewModel {
 	
 	init(movie: Movie?) {
 		self.movie = movie
-		bindModel()
-	}
-	
-	func bindModel() {
-		
 	}
 }
 

@@ -13,13 +13,7 @@ class ReviewMovieCellModel: ViewModel {
 	let review: Review?
 	
 	init(review: Review?) {
-		self.review = review
-		
-		bindModel()
-	}
-	
-	func bindModel() {
-		
+		self.review = review		
 	}
 }
 

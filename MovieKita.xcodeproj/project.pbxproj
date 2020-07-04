@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		46073F3F24B080F700AF187D /* MovieStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46073F3E24B080F700AF187D /* MovieStorage.swift */; };
 		46073F4124B0815200AF187D /* ArgoToSwiftDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46073F4024B0815200AF187D /* ArgoToSwiftDecodable.swift */; };
+		46073F4324B0E24A00AF187D /* HomeDetailViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46073F4224B0E24A00AF187D /* HomeDetailViewModelSpec.swift */; };
 		462FB35324AE0BDA001A165F /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB35224AE0BDA001A165F /* NavigationController.swift */; };
 		462FB35524AE0C0B001A165F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB35424AE0C0B001A165F /* HomeViewController.swift */; };
 		462FB36024AEE317001A165F /* ESPullToRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 462FB35F24AEE317001A165F /* ESPullToRefresh.framework */; };
@@ -107,6 +108,7 @@
 /* Begin PBXFileReference section */
 		46073F3E24B080F700AF187D /* MovieStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStorage.swift; sourceTree = "<group>"; };
 		46073F4024B0815200AF187D /* ArgoToSwiftDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgoToSwiftDecodable.swift; sourceTree = "<group>"; };
+		46073F4224B0E24A00AF187D /* HomeDetailViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailViewModelSpec.swift; sourceTree = "<group>"; };
 		462FB35224AE0BDA001A165F /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		462FB35424AE0C0B001A165F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		462FB35B24AEC5BD001A165F /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				463BF85B24AF9A7F0083A0F7 /* MovieKitaTests.swift */,
 				463BF85D24AF9A7F0083A0F7 /* Info.plist */,
 				463BF86624AF9BB70083A0F7 /* HomeViewModelSpec.swift */,
+				46073F4224B0E24A00AF187D /* HomeDetailViewModelSpec.swift */,
 			);
 			path = MovieKitaTests;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				463BF86724AF9BB70083A0F7 /* HomeViewModelSpec.swift in Sources */,
+				46073F4324B0E24A00AF187D /* HomeDetailViewModelSpec.swift in Sources */,
 				463BF85C24AF9A7F0083A0F7 /* MovieKitaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

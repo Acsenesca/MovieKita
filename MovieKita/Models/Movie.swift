@@ -58,10 +58,10 @@ struct ListMovie: Encodable {
 		
 		var container = encoder.container(keyedBy: PropertyKey.self)
 		
-		try container.encodeIfPresent(page, forKey: .page)
-		try container.encodeIfPresent(totalResults, forKey: .totalResults)
-		try container.encodeIfPresent(totalPages, forKey: .totalPages)
-		try container.encodeIfPresent(results, forKey: .results)
+		try container.encode(page, forKey: .page)
+		try container.encode(totalResults, forKey: .totalResults)
+		try container.encode(totalPages, forKey: .totalPages)
+		try container.encode(results, forKey: .results)
 	}
 }
 
@@ -101,26 +101,26 @@ struct Movie: Encodable {
 	let budget: Int?
 	
 	enum PropertyKey: String, CodingKey {
-		case id
-		case title
-		case voteAverage
-		case popularity
-		case voteCount
-		case genreIds
-		case video
-		case adult
-		case overview
-		case posterPath
-		case backdropPath
-		case originalLanguage
-		case originalTitle
-		case releaseDate
-		case genres
-		case revenue
-		case runtime
-		case status
-		case tagline
-		case budget
+		case id = "id"
+		case title = "title"
+		case voteAverage = "vote_average"
+		case popularity = "popularity"
+		case voteCount = "vote_count"
+		case genreIds = "genre_ids"
+		case video = "video"
+		case adult = "adult"
+		case overview = "overview"
+		case posterPath = "poster_path"
+		case backdropPath = "backdrop_path"
+		case originalLanguage = "original_anguage"
+		case originalTitle = "original_title"
+		case releaseDate = "release_date"
+		case genres = "genres"
+		case revenue = "revenue"
+		case runtime = "runtime"
+		case status = "status"
+		case tagline = "tagline"
+		case budget = "budget"
 	}
 	
 	func encode(to encoder: Encoder) throws {
@@ -128,25 +128,25 @@ struct Movie: Encodable {
 		var container = encoder.container(keyedBy: PropertyKey.self)
 		
 		try container.encode(id, forKey: .id)
-		try container.encodeIfPresent(title, forKey: .title)
-		try container.encodeIfPresent(voteAverage, forKey: .voteAverage)
-		try container.encodeIfPresent(popularity, forKey: .popularity)
-		try container.encodeIfPresent(voteCount, forKey: .voteCount)
-		try container.encodeIfPresent(genreIds, forKey: .genreIds)
-		try container.encodeIfPresent(video, forKey: .video)
-		try container.encodeIfPresent(adult, forKey: .adult)
-		try container.encodeIfPresent(overview, forKey: .overview)
-		try container.encodeIfPresent(posterPath, forKey: .posterPath)
-		try container.encodeIfPresent(backdropPath, forKey: .backdropPath)
-		try container.encodeIfPresent(originalLanguage, forKey: .originalLanguage)
-		try container.encodeIfPresent(originalTitle, forKey: .originalTitle)
-		try container.encodeIfPresent(releaseDate, forKey: .releaseDate)
-		try container.encodeIfPresent(genres, forKey: .genres)
-		try container.encodeIfPresent(revenue, forKey: .revenue)
-		try container.encodeIfPresent(runtime, forKey: .runtime)
-		try container.encodeIfPresent(status, forKey: .status)
-		try container.encodeIfPresent(tagline, forKey: .tagline)
-		try container.encodeIfPresent(budget, forKey: .budget)
+		try container.encode(title, forKey: .title)
+		try container.encode(voteAverage, forKey: .voteAverage)
+		try container.encode(popularity, forKey: .popularity)
+		try container.encode(voteCount, forKey: .voteCount)
+		try container.encode(genreIds, forKey: .genreIds)
+		try container.encode(video, forKey: .video)
+		try container.encode(adult, forKey: .adult)
+		try container.encode(overview, forKey: .overview)
+		try container.encode(posterPath, forKey: .posterPath)
+		try container.encode(backdropPath, forKey: .backdropPath)
+		try container.encode(originalLanguage, forKey: .originalLanguage)
+		try container.encode(originalTitle, forKey: .originalTitle)
+		try container.encode(releaseDate, forKey: .releaseDate)
+		try container.encode(genres, forKey: .genres)
+		try container.encode(revenue, forKey: .revenue)
+		try container.encode(runtime, forKey: .runtime)
+		try container.encode(status, forKey: .status)
+		try container.encode(tagline, forKey: .tagline)
+		try container.encode(budget, forKey: .budget)
 	}
 }
 
