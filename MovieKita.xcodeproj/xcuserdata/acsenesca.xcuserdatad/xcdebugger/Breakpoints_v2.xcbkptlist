@@ -227,47 +227,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B08AD931-1552-4185-B453-A15A64C44F94"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieKita/Controllers/HomeDetailViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
-            landmarkName = "configureCollectionView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E5EA9620-B158-4E90-A4F0-1376F9991AC2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieKita/Controllers/HomeDetailViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "configureCollectionView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "18B8B008-386F-489F-B045-628594D3AA81"
+            uuid = "1689570A-DB9F-4631-BC5D-8A9F8D81558F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieKita/Views/DetailMovieView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "configureView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -275,97 +243,59 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A28C9622-D1C6-4CD3-A552-EF64D343EE55"
+            uuid = "C9E074C0-26CE-4659-9079-521BEFAA3126"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MovieKita/Views/ReviewMovieCell.swift"
+            filePath = "MovieKita/Utils/ServicePersistenceManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "bindViewModel(viewModel:)"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "updateFavouriteMovies(favouriteMovies:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4C8DC645-6EB2-43D1-B269-3AEFD4459EA4"
+            uuid = "7188C1B2-D551-419B-8A3D-A6294D0C5484"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MovieKita/Controllers/HomeDetailViewController.swift"
+            filePath = "MovieKita/Views/DetailMovieView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "configureCollectionView()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4C8DC645-6EB2-43D1-B269-3AEFD4459EA4 - 25ec207688a30414"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MovieKita.HomeDetailViewController.(configureCollectionView in _A884BAB8F9D0E0FBCB4831E16F44E38E)() -&gt; ()"
-                  moduleName = "MovieKita"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/acsenesca/Documents/Developer/MovieKita/MovieKita/Controllers/HomeDetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "168"
-                  endingLineNumber = "168"
-                  offsetFromSymbolStart = "423">
-               </Location>
-               <Location
-                  uuid = "4C8DC645-6EB2-43D1-B269-3AEFD4459EA4 - 170e54557920b58d"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIWindow) -&gt; Swift.Bool in MovieKita.HomeDetailViewController.(configureCollectionView in _A884BAB8F9D0E0FBCB4831E16F44E38E)() -&gt; ()"
-                  moduleName = "MovieKita"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/acsenesca/Documents/Developer/MovieKita/MovieKita/Controllers/HomeDetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "168"
-                  endingLineNumber = "168"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
+            startingLineNumber = "94"
+            endingLineNumber = "94">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "71A80313-769C-4D5C-96D2-CFD86C2AE1AA"
+            uuid = "F8FE999B-E6D8-49AD-BE08-433519000B21"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MovieKita/Controllers/HomeDetailViewController.swift"
+            filePath = "MovieKita/Views/DetailMovieView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "collectionCellIdentifierAtIndexPath(indexPath:)"
-            landmarkType = "7">
+            startingLineNumber = "94"
+            endingLineNumber = "94">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F730370C-2451-4602-8695-22F7E1AD0B95"
+            uuid = "B7EFDA77-B5AB-4339-AA31-0B6C5885CDEF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MovieKita/Controllers/HomeDetailViewController.swift"
+            filePath = "MovieKita/Views/DetailMovieView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "bindViewModel()"
-            landmarkType = "7">
+            startingLineNumber = "94"
+            endingLineNumber = "94">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

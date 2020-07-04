@@ -12,14 +12,10 @@ import Kingfisher
 
 class DetailMovieViewModel: ViewModel {
 	let movie: Movie?
+	let selectedLove: Bool = false
 	
 	init(movie: Movie?) {
 		self.movie = movie
-		
-		bindModel()
-	}
-	
-	func bindModel() {
 		
 	}
 }
@@ -61,7 +57,8 @@ class DetailMovieView: UIView, ViewBinding {
 	func bindViewModel(viewModel: VM?) {
 		self.viewModel = viewModel
 		
-		configureView()
+		self.configureView()
+		self.configureGesture()
 	}
 	
 	func configureView() {
@@ -80,4 +77,17 @@ class DetailMovieView: UIView, ViewBinding {
 			}
 		}
 	}
+	
+	func configureGesture() {
+		let singleTap = UITapGestureRecognizer(target: self, action:  #selector(tapLoveDetected))
+		singleTap.numberOfTapsRequired = 1
+
+		self.icoLove.isUserInteractionEnabled = true
+		self.icoLove.addGestureRecognizer(singleTap)
+	}
+	
+	@objc func tapLoveDetected() {
+		print("Single Tap on imageview")
+	}
+
 }

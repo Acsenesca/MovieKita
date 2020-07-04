@@ -24,6 +24,7 @@
                     <rect key="frame" x="338" y="16" width="32" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="32" id="hZI-vK-8YT"/>
+                        <constraint firstAttribute="width" secondItem="ghk-RO-qV8" secondAttribute="height" multiplier="1:1" id="l17-Ne-JPW"/>
                         <constraint firstAttribute="height" constant="32" id="pKt-74-NzE"/>
                     </constraints>
                 </imageView>
@@ -76,4 +77,3 @@
         </view>
     </objects>
 </document>
-
