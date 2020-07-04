@@ -18,8 +18,8 @@ class HomeViewModel: ViewModel {
 	var selectedFilterType: MovieFilterType = .Popular
 	var page: Int = 2
 	
-	var batchUpdateHandler: (() -> Void) = {}
-	var reloadDataHandler: (([IndexPath]) -> Void) = { _ in }
+	var reloadDataHandler: (() -> Void) = {}
+	var batchUpdateHandler: (([IndexPath]) -> Void) = { _ in }
 	var didSelectHandler: ((Movie) -> Void) = {_ in }
 	
 	init() {}
@@ -32,7 +32,7 @@ class HomeViewModel: ViewModel {
 					self.listMovie.value = listMovie
 					self.movies.value = listMovie?.results
 					
-					self.batchUpdateHandler()
+					self.reloadDataHandler()
 				}
 				
 				completionHandler?()
@@ -58,7 +58,7 @@ class HomeViewModel: ViewModel {
 						indexPaths.append(indexPath)
 					}
 					
-					self.reloadDataHandler(indexPaths)
+					self.batchUpdateHandler(indexPaths)
 				}
 		}
 	}
@@ -131,7 +131,7 @@ class HomeViewController: UIViewController {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		self.viewModel.batchUpdateHandler()
+		self.viewModel.reloadDataHandler()
 	}
 	
 	fileprivate func bindViewModel() {
@@ -139,14 +139,14 @@ class HomeViewController: UIViewController {
 		collectionViewBinding?.bindFlowDelegateWithCollectionView(collectionView: collectionView)
 		collectionViewBinding?.bindDatasourceWithCollectionView(collectionView: collectionView)
 		
-		viewModel.batchUpdateHandler = { [weak self] in
+		viewModel.reloadDataHandler = { [weak self] in
 			self?.navigationItem.titleView = self?.setTitle(title: "Movie Kita", subtitle: self?.viewModel.selectedFilterType.rawValue() ?? "")
 			self?.collectionView.reloadData()
 			self?.refreshControl.endRefreshing()
 			self?.collectionView.es.stopLoadingMore()
 		}
 		
-		viewModel.reloadDataHandler = { [weak self] indexPaths in
+		viewModel.batchUpdateHandler = { [weak self] indexPaths in
 			self?.collectionView.performBatchUpdates({
 				self?.collectionView.insertItems(at: indexPaths)
 			}) { [weak self] _ in
@@ -226,7 +226,7 @@ class HomeViewController: UIViewController {
 		
 		alert.addAction(UIAlertAction(title: MovieFilterType.Favourite.rawValue(), style: .default , handler:{ (UIAlertAction) in
 			self.viewModel.selectedFilterType = .Favourite
-			self.viewModel.batchUpdateHandler()
+			self.viewModel.reloadDataHandler()
 		}))
 		alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
 		
