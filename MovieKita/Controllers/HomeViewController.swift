@@ -21,6 +21,7 @@ class HomeViewModel: ViewModel {
 	var reloadDataHandler: (() -> Void) = {}
 	var batchUpdateHandler: (([IndexPath]) -> Void) = { _ in }
 	var didSelectHandler: ((Movie) -> Void) = {_ in }
+	var emptyStateHandler: (() -> Void) = {}
 	
 	init() {}
 	
@@ -79,6 +80,8 @@ class HomeViewModel: ViewModel {
 extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, SelectedCollectionSource {
 	func numberOfCollectionCellAtSection(section: Int) -> Int {
 		if self.selectedFilterType == .Favourite {
+			self.emptyStateHandler()
+			
 			let storage = MovieStorage()
 			let fav = storage.value(key: MovieStorageKey.favoriteList.rawValue)
 			
@@ -165,6 +168,14 @@ class HomeViewController: UIViewController {
 			}) { [weak self] _ in
 				self?.refreshControl.endRefreshing()
 				self?.collectionView.es.stopLoadingMore()
+			}
+		}
+		
+		viewModel.emptyStateHandler = { [weak self] in
+			if (self?.viewModel.favMovies.value?.count == 0) || (self?.viewModel.favMovies.value == nil) {
+				self?.collectionView.setEmptyMessage("No data to display")
+			} else {
+				self?.collectionView.restore()
 			}
 		}
 		

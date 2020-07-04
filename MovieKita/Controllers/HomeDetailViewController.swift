@@ -17,6 +17,7 @@ class HomeDetailViewModel: ViewModel {
 	var page: Int = 2
 	var reloadDataHandler: (() -> Void) = {}
 	var batchUpdateHandler: (([IndexPath]) -> Void) = { _ in }
+	var emptyStateHandler: (() -> Void) = {}
 	
 	init(movie: Movie?) {
 		self.movie = movie
@@ -67,6 +68,8 @@ class HomeDetailViewModel: ViewModel {
 
 extension HomeDetailViewModel: SectionedCollectionSource, SizeCollectionSource {
 	func numberOfCollectionCellAtSection(section: Int) -> Int {
+		self.emptyStateHandler()
+		
 		return self.reviews.value?.count ?? 0
 	}
 	func collectionCellIdentifierAtIndexPath(indexPath: IndexPath) -> String {
@@ -139,6 +142,14 @@ class HomeDetailViewController: UIViewController {
 			self?.collectionView.es.stopLoadingMore()
 		}
 		
+		viewModel.emptyStateHandler = { [weak self] in
+			if (self?.viewModel.reviews.value?.count == 0) {
+				self?.collectionView.setEmptyMessage("Not yet reviewed")
+			} else {
+				self?.collectionView.restore()
+			}
+		}
+		
 		viewModel.batchUpdateHandler = { [weak self] indexPaths in
 			self?.collectionView.performBatchUpdates({
 				self?.collectionView.insertItems(at: indexPaths)
@@ -164,7 +175,7 @@ class HomeDetailViewController: UIViewController {
 		
 		view.addSubview(self.detailMovieView)
 		
-		setDetailMovieViewConstraints()
+		self.setDetailMovieViewConstraints()
 	}
 	
 	fileprivate func setDetailMovieViewConstraints() {

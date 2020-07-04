@@ -99,25 +99,23 @@ class DetailMovieView: UIView, ViewBinding {
 	
 	@objc func tapLoveDetected() {
 		if let vm = self.viewModel, let movie = vm.movie {
-			self.viewModel?.selectedLove = !vm.selectedLove
+			vm.selectedLove = !vm.selectedLove
 			let storage = MovieStorage()
 			
-			if let selectedLove = self.viewModel?.selectedLove {
-				self.icoLove.image = selectedLove ? UIImage(named: "ico-love-selected") : UIImage(named: "ico-love-unselected")
+			self.icoLove.image = vm.selectedLove ? UIImage(named: "ico-love-selected") : UIImage(named: "ico-love-unselected")
+
+			var movies = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			
+			if let films = movies {
 				
-				var movies = storage.value(key: MovieStorageKey.favoriteList.rawValue)
-				
-				if let films = movies {
-					
-					if let index = films.firstIndex(where: { film in film.id == movie.id }) {
-						movies?.remove(at: index)
-					} else {
-						movies?.append(movie)
-					}
+				if let index = films.firstIndex(where: { film in film.id == movie.id }) {
+					movies?.remove(at: index)
+				} else {
+					movies?.append(movie)
 				}
-				
-				storage.cache(value: movies ?? [], key: MovieStorageKey.favoriteList.rawValue)
 			}
+			
+			storage.cache(value: movies ?? [], key: MovieStorageKey.favoriteList.rawValue)
 		}
 	}
 }
