@@ -4,10 +4,6 @@
 
 1.0
 
-## Build and Runtime Requirements
-+ Xcode 11.3.1 or later
-+ iOS 13.0 or later
-
 ## Setup & Open the Project
 
 You'll need to have [Carthage](https://github.com/Carthage/Carthage) installed
