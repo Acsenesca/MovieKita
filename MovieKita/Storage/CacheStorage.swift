@@ -12,12 +12,11 @@ protocol CacheStorage {
 	associatedtype Key
 	associatedtype Value
 	
-	func cache(value: Value, key: Key)
+	func save(value: Value, key: Key)
 	
-	func value(key: Key) -> Value?
+	func load(key: Key) -> Value?
 	
-	func removeValue(key: Key)
+	func remove(key: Key)
 	
-	func removeAllValues()
+	func removeAll()
 }
-

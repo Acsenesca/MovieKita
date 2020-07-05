@@ -65,7 +65,7 @@ class HomeViewModel: ViewModel {
 	fileprivate func shouldSelectCell(_ indexPath: IndexPath) {
 		if self.selectedFilterType == .Favourite {
 			let storage = MovieStorage()
-			let fav = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			let fav = storage.load(key: MovieStorageKey.favoriteList.rawValue)
 			
 			guard let movie = fav?[indexPath.row] else { return }
 			self.didSelectHandler(movie)
@@ -82,7 +82,7 @@ extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, Select
 			self.emptyStateHandler()
 			
 			let storage = MovieStorage()
-			let fav = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			let fav = storage.load(key: MovieStorageKey.favoriteList.rawValue)
 			
 			return fav?.count ?? 0
 		} else {
@@ -95,7 +95,7 @@ extension HomeViewModel: SectionedCollectionSource, SizeCollectionSource, Select
 	func collectionCellModelAtIndexPath(indexPath: IndexPath) -> ViewModel {
 		if self.selectedFilterType == .Favourite {
 			let storage = MovieStorage()
-			let fav = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			let fav = storage.load(key: MovieStorageKey.favoriteList.rawValue)
 			
 			return MainMovieCellModel(movie: fav?[indexPath.row])
 		} else {
@@ -178,7 +178,7 @@ class HomeViewController: UIViewController {
 		
 		viewModel.emptyStateHandler = { [weak self] in
 			let storage = MovieStorage()
-			let fav = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			let fav = storage.load(key: MovieStorageKey.favoriteList.rawValue)
 			
 			if (fav?.count == 0) || (fav == nil) {
 				self?.collectionView.setEmptyMessage("No data to display")

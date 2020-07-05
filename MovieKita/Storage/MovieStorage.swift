@@ -31,7 +31,7 @@ class MovieStorage {
 }
 
 extension MovieStorage: CacheStorage {
-	func cache(value: [Movie], key: String) {
+	func save(value: [Movie], key: String) {
 		keys.append(key)
 		
 		if let movies = try? JSONEncoder().encode(value) {
@@ -39,7 +39,7 @@ extension MovieStorage: CacheStorage {
 		}
 	}
 	
-	func value(key: MovieStorage.Key) -> [Movie]? {
+	func load(key: MovieStorage.Key) -> [Movie]? {
 		keychain.synchronizable = true
 		let jsonString = keychain.get(key)
 		var films: [Movie]? = []
@@ -61,13 +61,13 @@ extension MovieStorage: CacheStorage {
 		return films
 	}
 	
-	func removeValue(key: String) {
+	func remove(key: String) {
 		keychain.delete(key)
 	}
 	
-	func removeAllValues() {
+	func removeAll() {
 		MovieKey.allCases.forEach { (key: MovieKey) in
-			removeValue(key: key.rawValue)
+			remove(key: key.rawValue)
 		}
 	}
 }

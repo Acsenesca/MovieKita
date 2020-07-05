@@ -75,7 +75,7 @@ class DetailMovieView: UIView, ViewBinding {
 			}
 			
 			let storage = MovieStorage()
-			let movies = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			let movies = storage.load(key: MovieStorageKey.favoriteList.rawValue)
 			
 			if let films = movies {
 				if let _ = films.first(where: { film in film.id == movie.id }) {
@@ -104,7 +104,7 @@ class DetailMovieView: UIView, ViewBinding {
 			
 			self.icoLove.image = vm.selectedLove ? UIImage(named: "ico-love-selected") : UIImage(named: "ico-love-unselected")
 
-			var movies = storage.value(key: MovieStorageKey.favoriteList.rawValue)
+			var movies = storage.load(key: MovieStorageKey.favoriteList.rawValue)
 			
 			if let films = movies {
 				
@@ -115,7 +115,7 @@ class DetailMovieView: UIView, ViewBinding {
 				}
 			}
 			
-			storage.cache(value: movies ?? [], key: MovieStorageKey.favoriteList.rawValue)
+			storage.save(value: movies ?? [], key: MovieStorageKey.favoriteList.rawValue)
 		}
 	}
 }

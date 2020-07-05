@@ -53,7 +53,7 @@ class MovieStorageSpec: QuickSpec {
 		}
 		
 		afterEach {
-			movieStorage.removeAllValues()
+			movieStorage.removeAll()
 			movieStorage = nil
 			
 			mockMovie = nil
@@ -68,9 +68,9 @@ class MovieStorageSpec: QuickSpec {
 					
 					let favoriteListKey = MockMovieKey.favoriteList.rawValue
 					
-					movieStorage.cache(value: [mockMovie], key: favoriteListKey)
+					movieStorage.save(value: [mockMovie], key: favoriteListKey)
 					
-					let favoriteList = movieStorage.value(key:favoriteListKey)
+					let favoriteList = movieStorage.load(key:favoriteListKey)
 					
 					expect(favoriteList?.count) > 0
 				}
@@ -80,9 +80,9 @@ class MovieStorageSpec: QuickSpec {
 					
 					let favoriteListKey = MockMovieKey.favoriteList.rawValue
 					
-					movieStorage.cache(value: [mockMovie], key: favoriteListKey)
+					movieStorage.save(value: [mockMovie], key: favoriteListKey)
 					
-					let favoriteList = movieStorage.value(key:favoriteListKey)
+					let favoriteList = movieStorage.load(key:favoriteListKey)
 					
 					expect(favoriteList?.first?.title) == "Avenger"
 				}
@@ -95,10 +95,10 @@ class MovieStorageSpec: QuickSpec {
 					
 					let favoriteListKey = MockMovieKey.favoriteList.rawValue
 					
-					movieStorage.cache(value: [mockMovie], key: favoriteListKey)
-					movieStorage.removeValue(key: favoriteListKey)
+					movieStorage.save(value: [mockMovie], key: favoriteListKey)
+					movieStorage.remove(key: favoriteListKey)
 					
-					let favoriteList = movieStorage.value(key:favoriteListKey)
+					let favoriteList = movieStorage.load(key:favoriteListKey)
 					
 					expect(favoriteList?.count) == 0
 				}
